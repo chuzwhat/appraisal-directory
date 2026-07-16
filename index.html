@@ -1,0 +1,708 @@
+
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>감정평가법인 디렉토리 - 포털 및 관리 통합망</title>
+    
+    <!-- Tailwind CSS & Google Fonts & FontAwesome Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+                    },
+                    colors: {
+                        tossBlue: {
+                            50: '#f2f8ff',
+                            100: '#e1f0ff',
+                            500: '#3182f6',
+                            600: '#1b64da',
+                            700: '#0f4cb3',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc;
+        }
+        .custom-shadow {
+            box-shadow: 0 4px 20px -2px rgba(148, 163, 184, 0.08), 0 2px 8px -1px rgba(148, 163, 184, 0.06);
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50/50 min-h-screen flex flex-col justify-between">
+
+    <!-- 상단 네비게이션 바 -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between relative">
+            <!-- 데스크톱 좌우 대칭용 레이아웃 분할기 -->
+            <div class="hidden sm:block w-24"></div> 
+            
+            <!-- 완벽히 가운데 정렬되고 눈에 띄게 큰 로고/텍스트 영역 -->
+            <div class="flex items-center space-x-3 mx-auto sm:absolute sm:left-1/2 sm:-translate-x-1/2">
+                <div class="w-10 h-10 bg-tossBlue-500 rounded-xl flex items-center justify-center text-white text-lg shadow-md transition-transform hover:scale-105">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+                <span class="text-lg sm:text-2xl font-black tracking-tight text-slate-950">
+                    감정평가법인 디렉토리
+                </span>
+            </div>
+            
+            <!-- 공유하기 버튼 -->
+            <div class="flex items-center shrink-0">
+                <button onclick="copyShareLink()" class="flex items-center space-x-1.5 bg-tossBlue-50 hover:bg-tossBlue-100 text-tossBlue-500 px-3.5 py-2 rounded-xl text-xs font-bold transition-all border-none">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <span class="hidden sm:inline">공유하기</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 공지사항 및 메인 안내 섹션 (디렉토리 타이틀 아래로 정보 박스 수평 재배치) -->
+    <section class="bg-white border-b border-slate-150 py-8 sm:py-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <!-- 타이틀 및 소개글 -->
+            <div class="text-left">
+                <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 leading-tight">
+                    감정평가법인 <span class="text-tossBlue-500">디렉토리</span>
+                </h1>
+                <p class="text-slate-600 text-sm sm:text-base mt-3.5 max-w-3xl leading-relaxed font-bold font-sans">
+                    13개 대형 감정평가법인의 홈페이지, 자기소개서 양식, 영업수익, 본사 소재지를 한 번에 파악할 수 있는 포털입니다.
+                </p>
+            </div>
+            
+            <!-- 하단 수평 그리드: 와이드 화면 가로 밸런스 개선 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8 pt-6 border-t border-slate-100">
+                
+                <!-- 1. 자료 출처 및 유의사항 박스 -->
+                <div class="bg-white border border-slate-200/80 rounded-2xl p-5 custom-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-tossBlue-500 text-sm"></i>
+                            <span>자료 출처 및 유의사항</span>
+                        </div>
+                        <div class="text-[11px] sm:text-xs text-slate-600 mt-3 space-y-2.5 leading-relaxed font-medium">
+                            <p>• <strong>자기소개서 :</strong> 각 법인의 홈페이지에서 확인 가능한 자기소개서이며, 반드시 개별 확인을 거쳐 활용하시기 바랍니다.</p>
+                            <p>• <strong>자소서 최신 업데이트 :</strong> 2026년 7월</p>
+                            <p>• <strong>영업수익 :</strong> 각 법인의 경영공시(2025 손익계산서) 자료를 기준하였으며, 억 단위 미만 절사하였습니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 문의 및 제보 박스 -->
+                <div class="bg-slate-50 border border-slate-200/60 rounded-2xl p-5 custom-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-bullhorn text-amber-500 text-sm"></i>
+                            <span>문의 및 제보</span>
+                        </div>
+                        <div class="text-[11px] sm:text-xs text-slate-600 mt-3 space-y-3 leading-relaxed font-medium">
+                            <p>데이터 오류 제보나 수정 요청, 문의사항이 있으시면 아래 이메일을 통해 전달해 주세요.</p>
+                            
+                            <!-- 복사 및 바로 작성이 가능한 이메일 표시 칸 -->
+                            <div class="flex items-center justify-between gap-3 bg-white border border-slate-200/80 rounded-xl p-2.5 shadow-sm">
+                                <span class="font-normal text-slate-800 tracking-tight text-xs sm:text-[13px] select-all">chuzwhat@gmail.com</span>
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    <button onclick="copyEmail()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 p-2 rounded-lg text-xs font-bold transition-all border-none flex items-center justify-center cursor-pointer" title="이메일 주소 복사">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="mailto:chuzwhat@gmail.com?subject=[감평법인 디렉토리 문의 및 제보]" class="mt-4 inline-flex items-center justify-center gap-2 bg-tossBlue-500 hover:bg-tossBlue-600 text-white py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all w-full text-center shadow-sm decoration-none">
+                        <i class="fa-solid fa-envelope text-xs"></i>
+                        <span>이메일 보내기</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 w-full flex-grow">
+        
+        <!-- 실시간 필터 및 검색 바 -->
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 custom-shadow space-y-4 mb-8">
+            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                <i class="fa-solid fa-sliders"></i>
+                <span>실시간 필터 및 정렬 방식</span>
+            </div>
+            <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+                
+                <!-- 검색창 -->
+                <div class="relative flex-grow">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                    </span>
+                    <input type="text" id="search-input" oninput="filterCompanies()" class="block w-full pl-10 pr-4 py-2.5 bg-slate-50/80 border border-slate-100 focus:border-tossBlue-500 focus:bg-white focus:ring-4 focus:ring-tossBlue-500/10 rounded-xl text-xs sm:text-sm font-medium transition-all" placeholder="법인명 또는 소재지로 실시간 검색...">
+                </div>
+
+                <!-- 정렬 및 뷰 전환 컨트롤 그룹 -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <!-- 정렬 조건 -->
+                    <div class="flex bg-slate-100 p-1 rounded-xl border border-slate-200/50">
+                        <button id="sort-rev-btn" onclick="changeSort('revenue')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none">
+                            📊 영업수익 순
+                        </button>
+                        <button id="sort-cli-btn" onclick="changeSort('clicks')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent">
+                            🖱️ 클릭수 순
+                        </button>
+                    </div>
+
+                    <!-- 뷰 모드 -->
+                    <div class="flex bg-slate-100 p-1 rounded-xl border border-slate-200/50">
+                        <button id="view-grid-btn" onclick="changeView('grid')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none">
+                            <i class="fa-solid fa-table-cells-large mr-1"></i>격자형
+                        </button>
+                        <button id="view-list-btn" onclick="changeView('list')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent">
+                            <i class="fa-solid fa-list mr-1"></i>가로형
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 콘텐츠 구분을 위한 법인 목록 영역 타이틀 -->
+        <div class="flex items-center justify-between mb-4 px-1">
+            <h2 class="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                <i class="fa-solid fa-building text-slate-400"></i>
+                <span>등록 법인 디렉토리</span>
+                <span id="company-count" class="bg-tossBlue-50 text-tossBlue-600 px-2.5 py-0.5 rounded-full text-[10px] font-black border border-tossBlue-100">
+                    -
+                </span>
+            </h2>
+        </div>
+
+        <!-- 법인 목록 카드/리스트 렌더링 컨테이너 -->
+        <div id="company-list" class="grid gap-4 transition-all duration-300">
+            <!-- JavaScript를 통해 가로형/격자형 템플릿이 동적 렌더링됩니다 -->
+        </div>
+
+    </main>
+
+    <!-- 푸터 및 관리자 토글 영역 -->
+    <footer class="bg-white border-t border-slate-150 py-8 w-full mt-12">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-slate-950 font-bold text-xs sm:text-sm">감정평가법인 디렉토리 포털</h3>
+                    <p class="text-[10px] sm:text-xs text-slate-400 mt-1">본 서비스는 공공 공시 자료 및 채용 요강을 기반으로 학습·정보공유를 목적으로 제작되었습니다.</p>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <span class="text-[10px] sm:text-xs text-slate-400 font-semibold">
+                        © 2026 Appraisal Directory.
+                    </span>
+                    <button onclick="toggleAdmin()" class="bg-transparent border-none text-[10px] sm:text-xs text-slate-300 hover:text-slate-500 cursor-pointer underline decoration-dotted transition-colors">
+                        관리자 메뉴
+                    </button>
+                </div>
+            </div>
+
+            <!-- 대시보드형 관리자 패널 영역 (비밀번호: 1234) -->
+            <div id="admin-panel" class="hidden mt-8 bg-slate-50 border border-dashed border-slate-300 rounded-2xl p-5 sm:p-6 text-left">
+                <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-5">
+                    <h3 class="text-slate-900 font-extrabold text-sm sm:text-base flex items-center gap-1.5">
+                        <i class="fa-solid fa-screwdriver-wrench text-tossBlue-500"></i>
+                        <span>새 법인 정보 등록</span>
+                    </h3>
+                    <span class="bg-tossBlue-500/10 text-tossBlue-600 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                        Admin Mode Active
+                    </span>
+                </div>
+
+                <!-- 새 법인 등록 폼 그리드 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">법인명 (예: 미래새한)</label>
+                        <input type="text" id="comp-name" class="w-full text-xs font-semibold p-2.5 bg-white border border-slate-200 rounded-xl focus:border-tossBlue-500 focus:outline-none" placeholder="법인명 입력">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">공식 홈페이지 주소 (URL)</label>
+                        <input type="url" id="comp-url" class="w-full text-xs font-semibold p-2.5 bg-white border border-slate-200 rounded-xl focus:border-tossBlue-500 focus:outline-none" placeholder="https://...">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">본사 소재지 (주소)</label>
+                        <input type="text" id="comp-address" class="w-full text-xs font-semibold p-2.5 bg-white border border-slate-200 rounded-xl focus:border-tossBlue-500 focus:outline-none" placeholder="전체 주소 입력">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">영업수익 숫자 (순위 판별용)</label>
+                        <input type="number" id="comp-revenue-num" class="w-full text-xs font-semibold p-2.5 bg-white border border-slate-200 rounded-xl focus:border-tossBlue-500 focus:outline-none" placeholder="788">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">영업수익 텍스트 (화면 표기용)</label>
+                        <input type="text" id="comp-revenue-text" class="w-full text-xs font-semibold p-2.5 bg-white border border-slate-200 rounded-xl focus:border-tossBlue-500 focus:outline-none" placeholder="788억 원">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">자기소개서 다운로드 링크</label>
+                        <input type="url" id="comp-download" class="w-full text-xs font-semibold p-2.5 bg-white border border-slate-200 rounded-xl focus:border-tossBlue-500 focus:outline-none" placeholder="구글드라이브 등 주소">
+                    </div>
+                </div>
+
+                <div class="flex justify-end mb-8">
+                    <button onclick="addCompany()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-6 rounded-xl transition-colors border-none cursor-pointer">
+                        <i class="fa-solid fa-plus mr-1"></i> 법인 등록완료
+                    </button>
+                </div>
+
+                <!-- 기존 법인 리스트 데이터 수정 테이블 -->
+                <div class="border-t border-slate-200 pt-5">
+                    <h3 class="text-slate-900 font-extrabold text-sm sm:text-base mb-4 flex items-center gap-1.5">
+                        <i class="fa-solid fa-pen-to-square text-tossBlue-500"></i>
+                        <span>기존 등록 법인 데이터 수정 / 삭제</span>
+                    </h3>
+                    
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200">
+                                    <th class="p-3">법인명</th>
+                                    <th class="p-3">홈페이지 주소 (URL)</th>
+                                    <th class="p-3">본사 소재지</th>
+                                    <th class="p-3" style="width: 80px;">수익(숫자)</th>
+                                    <th class="p-3" style="width: 100px;">수익(텍스트)</th>
+                                    <th class="p-3">자소서 가이드 링크</th>
+                                    <th class="p-3" style="width: 110px; text-align: center;">기능</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-table-body" class="divide-y divide-slate-100">
+                                <!-- JS 동적 생성 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- 알림 팝업 토스트 (공유 완료 / 시스템 액션 알림) -->
+    <div id="alert-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-slate-950 text-white rounded-xl px-4 py-3 shadow-2xl flex items-center space-x-2.5 max-w-sm border border-slate-800">
+            <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs flex-shrink-0">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+                <p class="font-extrabold text-xs text-white" id="toast-title">처리 성공</p>
+                <p class="text-[10px] text-slate-400 mt-0.5" id="toast-body">알림 메시지 본문입니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 스크립트 비즈니스 로직 -->
+    <script>
+        const defaultCompanies = [
+            {"id":1783908898678,"name":"하나","url":"https://haac.co.kr/","address":"서울특별시 서초구 양재대로 11길 36 서울오토갤러리 금관 5층","revenueNum":788,"revenue":"788억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=1zaYIoZVq7s95lUJEZisSON56ybL-D0TJ","clicks":12},
+            {"id":1783908443133,"name":"대화","url":"http://www.dhapp.co.kr/","address":"서울특별시 서초구 서초중앙로 14, 18층","revenueNum":772,"revenue":"772억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=1s2XWNkn6i3Okzi-vHOuH_ljomDcfcXYX","clicks":8},
+            {"id":1,"name":"미래새한","url":"https://www.msapp.co.kr/","address":"서울특별시 송파구 충민로 52 가든파이브웍스 A동 9층","revenueNum":771,"revenue":"771억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=1uH63sIzDN0E0nP708xYRC_HUwZeIRtHY","clicks":15},
+            {"id":2,"name":"경일","url":"https://www.kyungil.co.kr/main/main.php","address":"서울특별시 송파구 중대로 135 IT벤처타워 동관 7층","revenueNum":768,"revenue":"768억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=1ub5kBcFpVXdUCe3hhj5EzE-3WT8qRFVD","clicks":21},
+            {"id":3,"name":"삼창","url":"http://isamchang.com","address":"서울특별시 서초구 반포대로 14길27, 2층","revenueNum":736,"revenue":"736억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=1xQy70cOisfLNAC_dy5f41ty8GexiqkpN","clicks":19},
+            {"id":1783497704656,"name":"제일","url":"https://www.facc.co.kr/","address":"서울특별시 서초구 방배로 28 3층","revenueNum":715,"revenue":"715억 원","downloadUrl":"","clicks":11},
+            {"id":1783908659513,"name":"태평양","url":"http://www.packor.com/","address":"서울특별시 중구 다산로 32 남산타운상가5동","revenueNum":679,"revenue":"679억원","downloadUrl":"https://docs.google.com/uc?export=download&id=1k7LCViANgLKK00eQDy0T20LWZQfXwT8j","clicks":7},
+            {"id":1783561304040,"name":"나라","url":"http://www.nara.ne.kr/","address":"서울특별시 종로구 사직로 130 적선현대빌딩 8층","revenueNum":666,"revenue":"666억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=1ub5kBcFpVXdUCe3hhj5EzE-3WT8qRFVD","clicks":9},
+            {"id":1783908225112,"name":"대일감정원","url":"http://www.idab.co.kr/ndab/ko/","address":"서울특별시 서초구 논현로 83, 삼호물산빌딩 A동 2층","revenueNum":653,"revenue":"653억 원","downloadUrl":"","clicks":13},
+            {"id":1783561016191,"name":"가람","url":"https://kaaram.com/","address":"서울특별시 서초구 남부순환로364길 8-9 4층","revenueNum":638,"revenue":"638억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=1FLMbIlV2zAYknqMz-R4RWAHOoXdoVgFF","clicks":14},
+            {"id":1783908312767,"name":"대한","url":"https://kosal.co.kr/","address":"서울특별시 송파구 충민로 10, 가든파이브툴동 10층","revenueNum":634,"revenue":"634억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=14ZnkqXGE_9QA7H89IWoDzLM7xcmvnqOq","clicks":5},
+            {"id":1783908613776,"name":"중앙","url":"http://www.jaa.co.kr/","address":"서울특별시 서초구 서초중앙로 63 리더스빌딩 2F","revenueNum":633,"revenue":"633억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=1Qt0SfSgNR_r05gE3DrZrAG9XH5fQtF71","clicks":10},
+            {"id":1783561154543,"name":"가온","url":"http://www.igaon.co.kr/","address":"서울특별시 송파구 충민로 10 가든파이브툴 8층","revenueNum":585,"revenue":"585억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=1ooU4x3VD9kaxj40BTOelDvWACt8KZW7q","clicks":11},
+            {"id":1783909197359,"name":"한국감정평가사협회","url":"https://www.kapanet.or.kr/","address":"서울특별시 서초구 방배로 52 4~6층","revenueNum":150,"revenue":"150억 원(추산)","downloadUrl":"","clicks":25}
+        ];
+
+        let AppState = {
+            companies: [],
+            currentSort: 'revenue',
+            currentView: 'grid',
+            searchQuery: '',
+            isAdmin: false
+        };
+
+        // 데이터 초기화 및 로컬 스토리지 동기화
+        function initData() {
+            const saved = localStorage.getItem('companies');
+            if (saved) {
+                try {
+                    AppState.companies = JSON.parse(saved);
+                } catch (e) {
+                    AppState.companies = [...defaultCompanies];
+                }
+            } else {
+                AppState.companies = [...defaultCompanies];
+                localStorage.setItem('companies', JSON.stringify(AppState.companies));
+            }
+        }
+
+        // 검색어 가공 및 연동
+        function filterCompanies() {
+            AppState.searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+            render();
+        }
+
+        // 정렬 모드 전환 및 활성버튼 스타일 토글
+        function changeSort(type) {
+            AppState.currentSort = type;
+            const sortRevBtn = document.getElementById('sort-rev-btn');
+            const sortCliBtn = document.getElementById('sort-cli-btn');
+
+            if (type === 'revenue') {
+                sortRevBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none";
+                sortCliBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent";
+            } else {
+                sortRevBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent";
+                sortCliBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none";
+            }
+            render();
+        }
+
+        // 뷰 모드 전환 (격자형 vs 가로형)
+        function changeView(mode) {
+            AppState.currentView = mode;
+            const viewGridBtn = document.getElementById('view-grid-btn');
+            const viewListBtn = document.getElementById('view-list-btn');
+
+            if (mode === 'grid') {
+                viewGridBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none";
+                viewListBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent";
+            } else {
+                viewGridBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent";
+                viewListBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none";
+            }
+            render();
+        }
+
+        // 클릭 이벤트 핸들링 (클릭수 증산 및 로컬 스토리지 보존)
+        function addClick(id) {
+            AppState.companies = AppState.companies.map(c => {
+                if (c.id === id) {
+                    return { ...c, clicks: (c.clicks || 0) + 1 };
+                }
+                return c;
+            });
+            localStorage.setItem('companies', JSON.stringify(AppState.companies));
+            setTimeout(render, 150);
+        }
+
+        // 공용 렌더링 엔진 (메인 카드 그리드 + 관리자 테이블)
+        function render() {
+            let displayed = [...AppState.companies];
+
+            // 1. 소팅 전개
+            if (AppState.currentSort === 'revenue') {
+                displayed.sort((a, b) => b.revenueNum - a.revenueNum);
+            } else {
+                displayed.sort((a, b) => (b.clicks || 0) - (a.clicks || 0));
+            }
+
+            // 2. 검색 필터링
+            if (AppState.searchQuery) {
+                displayed = displayed.filter(c => 
+                    c.name.toLowerCase().includes(AppState.searchQuery) ||
+                    c.address.toLowerCase().includes(AppState.searchQuery)
+                );
+            }
+
+            // 실시간 법인 개수 업데이트
+            const countBadge = document.getElementById('company-count');
+            if (countBadge) {
+                countBadge.textContent = `${displayed.length}개 법인 노출 중`;
+            }
+
+            const container = document.getElementById('company-list');
+            container.innerHTML = '';
+
+            // 3. 레이아웃에 따른 컨테이너 구조 변경
+            if (AppState.currentView === 'grid') {
+                container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4";
+            } else {
+                container.className = "flex flex-col gap-3";
+            }
+
+            if (displayed.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-slate-400 text-xs font-medium bg-white rounded-2xl border border-slate-100 shadow-sm">
+                        <i class="fa-solid fa-folder-open text-3xl mb-3 block text-slate-300"></i>
+                        현재 일치하거나 등록된 법인 정보가 없습니다.
+                    </div>
+                `;
+            } else {
+                displayed.forEach(company => {
+                    const card = document.createElement('div');
+                    
+                    // 관리자 전용 클릭 수 뱃지
+                    const adminClicksBadge = AppState.isAdmin
+                        ? `<span class="bg-red-50 text-red-600 font-extrabold text-[10px] px-2 py-0.5 rounded-md flex items-center gap-1 shrink-0">
+                             <i class="fa-solid fa-lock text-[8px]"></i> 클릭수: ${company.clicks || 0}회
+                           </span>`
+                        : '';
+
+                    // 자소서 다운로드 버튼
+                    const downloadBtn = company.downloadUrl 
+                        ? `<a href="${company.downloadUrl}" target="_blank" class="py-2.5 bg-tossBlue-500 hover:bg-tossBlue-600 text-white font-bold text-xs text-center rounded-xl transition-colors flex items-center justify-center gap-1.5 border-none decoration-none">
+                             <i class="fa-solid fa-file-arrow-down text-[10px]"></i>자소서 다운로드
+                           </a>`
+                        : `<div class="py-2.5 bg-slate-100 text-slate-400 font-bold text-xs text-center rounded-xl cursor-not-allowed flex items-center justify-center gap-1.5">
+                             자소서 준비중
+                           </div>`;
+
+                    if (AppState.currentView === 'grid') {
+                        card.className = "bg-white border border-slate-200/60 rounded-2xl p-5 custom-shadow hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between min-h-[215px] h-auto";
+                        card.innerHTML = `
+                            <div class="space-y-2.5">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="text-base sm:text-lg font-black text-slate-900 truncate">
+                                        <a href="${company.url}" target="_blank" onclick="addClick(${company.id})" class="text-slate-900 hover:text-tossBlue-500 transition-colors decoration-none">
+                                            ${company.name}
+                                        </a>
+                                    </h3>
+                                    ${adminClicksBadge}
+                                </div>
+                                
+                                <div class="space-y-1">
+                                    <div class="text-xs sm:text-sm text-slate-900 font-extrabold flex items-center gap-1.5">
+                                        <span class="text-slate-400 font-medium text-[11px] sm:text-xs shrink-0">영업수익</span>
+                                        <span>${company.revenueNum > 0 ? company.revenue : '공시 준비중'}</span>
+                                    </div>
+                                    <div class="text-xs sm:text-[13px] text-slate-500 font-medium flex items-start gap-1.5 leading-relaxed">
+                                        <i class="fa-solid fa-location-dot text-slate-300 shrink-0 mt-0.5"></i>
+                                        <span class="break-keep whitespace-normal">${company.address}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-50 mt-3">
+                                <a href="${company.url}" target="_blank" onclick="addClick(${company.id})" class="py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs text-center rounded-xl transition-colors flex items-center justify-center gap-1 border-none decoration-none">
+                                    홈페이지 <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-slate-400"></i>
+                                </a>
+                                ${downloadBtn}
+                            </div>
+                        `;
+                    } else {
+                        card.className = "bg-white border border-slate-200/60 rounded-2xl p-4 custom-shadow hover:-translate-y-0.5 transition-all duration-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4";
+                        card.innerHTML = `
+                            <div class="flex-grow space-y-2">
+                                <div class="flex items-center gap-3">
+                                    <h3 class="text-base sm:text-lg font-black text-slate-900">
+                                        <a href="${company.url}" target="_blank" onclick="addClick(${company.id})" class="text-slate-900 hover:text-tossBlue-500 transition-colors decoration-none">
+                                            ${company.name}
+                                        </a>
+                                    </h3>
+                                    ${adminClicksBadge}
+                                </div>
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+                                    <div class="text-xs sm:text-sm text-slate-900 font-extrabold flex items-center gap-1.5">
+                                        <span class="text-slate-400 font-medium text-[11px] sm:text-xs shrink-0">영업수익</span>
+                                        <span>${company.revenueNum > 0 ? company.revenue : '공시 준비중'}</span>
+                                    </div>
+                                    <div class="text-xs sm:text-[13px] text-slate-500 font-medium truncate flex items-center gap-1">
+                                        <i class="fa-solid fa-location-dot text-slate-300 shrink-0"></i>
+                                        <span>${company.address}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-2 shrink-0 self-stretch sm:self-auto sm:w-[260px]">
+                                <a href="${company.url}" target="_blank" onclick="addClick(${company.id})" class="flex-1 py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs text-center rounded-xl transition-colors flex items-center justify-center gap-1 border-none decoration-none">
+                                    홈페이지 <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-slate-400"></i>
+                                </a>
+                                <div class="flex-1 shrink-0">
+                                    ${downloadBtn}
+                                </div>
+                            </div>
+                        `;
+                    }
+                    container.appendChild(card);
+                });
+            }
+
+            // 4. 관리자 테이블 수정 영역 동적 생성
+            if (AppState.isAdmin) {
+                const adminTableBody = document.getElementById('admin-table-body');
+                adminTableBody.innerHTML = '';
+                
+                AppState.companies.forEach(company => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-50/50 transition-colors";
+                    tr.innerHTML = `
+                        <td class="p-2 border-r border-slate-100"><input type="text" id="edit-name-${company.id}" value="${company.name}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none"></td>
+                        <td class="p-2 border-r border-slate-100"><input type="url" id="edit-url-${company.id}" value="${company.url}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none"></td>
+                        <td class="p-2 border-r border-slate-100"><input type="text" id="edit-addr-${company.id}" value="${company.address}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none"></td>
+                        <td class="p-2 border-r border-slate-100"><input type="number" id="edit-revnum-${company.id}" value="${company.revenueNum}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none text-right"></td>
+                        <td class="p-2 border-r border-slate-100"><input type="text" id="edit-revtxt-${company.id}" value="${company.revenue}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none"></td>
+                        <td class="p-2 border-r border-slate-100"><input type="url" id="edit-down-${company.id}" value="${company.downloadUrl}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none"></td>
+                        <td class="p-2">
+                            <div class="flex items-center justify-center gap-1">
+                                <button onclick="updateCompany(${company.id})" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-[11px] py-1.5 px-2.5 rounded-lg transition-colors border-none cursor-pointer">저장</button>
+                                <button onclick="deleteCompany(${company.id})" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-[11px] py-1.5 px-2.5 rounded-lg transition-colors border-none cursor-pointer">삭제</button>
+                            </div>
+                        </td>
+                    `;
+                    adminTableBody.appendChild(tr);
+                });
+            }
+
+            // 로컬 스토리지 데이터 동기화
+            localStorage.setItem('companies', JSON.stringify(AppState.companies));
+        }
+
+        // 토스트 알림 띄우기 유틸리티
+        function showToast(title, body) {
+            const toast = document.getElementById('alert-toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-body').textContent = body;
+
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+
+        // 공유 링크 복사 및 알림 연동
+        function copyShareLink() {
+            const tempInput = document.createElement("input");
+            tempInput.value = window.location.href;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            showToast('공유 링크 복사 완료 🚀', '클립보드에 주소가 복사되었습니다. 주위에 널리 알려주세요!');
+        }
+
+        // 이메일 주소 복사 유틸리티
+        function copyEmail() {
+            const tempInput = document.createElement("input");
+            tempInput.value = "chuzwhat@gmail.com";
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            showToast('이메일 주소 복사 완료 ✉️', 'chuzwhat@gmail.com 주소가 클립보드에 복사되었습니다.');
+        }
+
+        // 관리자 패널 활성화 토글 (비밀번호: 1234)
+        function toggleAdmin() {
+            if (!AppState.isAdmin) {
+                const password = prompt("관리자 비밀번호를 입력하십시오:");
+                if (password === "1234") {
+                    AppState.isAdmin = true;
+                    document.getElementById('admin-panel').classList.remove('hidden');
+                    showToast('관리자 인증 완료 🔐', '법인 등록 및 수정/삭제 권한이 부여되었습니다.');
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: document.body.scrollHeight,
+                            behavior: 'smooth'
+                        });
+                    }, 200);
+                    render();
+                } else {
+                    alert("인증 정보가 유효하지 않습니다.");
+                }
+            } else {
+                AppState.isAdmin = false;
+                document.getElementById('admin-panel').classList.add('hidden');
+                showToast('관리자 모드 해제 🔒', '사용자 모드로 변경되었습니다.');
+                render();
+            }
+        }
+
+        // 새 법인 등록 처리 함수
+        function addCompany() {
+            const name = document.getElementById('comp-name').value.trim();
+            const url = document.getElementById('comp-url').value.trim();
+            const address = document.getElementById('comp-address').value.trim();
+            const revenueNum = parseInt(document.getElementById('comp-revenue-num').value) || 0;
+            const revenue = document.getElementById('comp-revenue-text').value.trim();
+            const downloadUrl = document.getElementById('comp-download').value.trim();
+
+            if (!name || !url) {
+                return alert("법인명과 홈페이지 주소는 필수로 채워 넣어야 합니다.");
+            }
+
+            const newCompany = {
+                id: Date.now(),
+                name: name,
+                url: url,
+                address: address || "주소 미지정",
+                revenueNum: revenueNum,
+                revenue: revenue || `${revenueNum}억 원`,
+                downloadUrl: downloadUrl,
+                clicks: 0
+            };
+
+            AppState.companies.push(newCompany);
+            render();
+
+            // 폼 필드 비우기
+            document.getElementById('comp-name').value = '';
+            document.getElementById('comp-url').value = '';
+            document.getElementById('comp-address').value = '';
+            document.getElementById('comp-revenue-num').value = '';
+            document.getElementById('comp-revenue-text').value = '';
+            document.getElementById('comp-download').value = '';
+
+            showToast('법인 신규 등록 완료 🎉', `'${name}'의 정보가 성공적으로 영구 등록되었습니다.`);
+        }
+
+        // 기존 법인 데이터 수정 반영
+        function updateCompany(id) {
+            const name = document.getElementById(`edit-name-${id}`).value.trim();
+            const url = document.getElementById(`edit-url-${id}`).value.trim();
+            const address = document.getElementById(`edit-addr-${id}`).value.trim();
+            const revenueNum = parseInt(document.getElementById(`edit-revnum-${id}`).value) || 0;
+            const revenue = document.getElementById(`edit-revtxt-${id}`).value.trim();
+            const downloadUrl = document.getElementById(`edit-down-${id}`).value.trim();
+
+            if (!name || !url) {
+                return alert("수정 시 법인명과 홈페이지 주소는 공백으로 남겨둘 수 없습니다.");
+            }
+
+            AppState.companies = AppState.companies.map(c => {
+                if (c.id === id) {
+                    return { ...c, name, url, address, revenueNum, revenue, downloadUrl };
+                }
+                return c;
+            });
+
+            showToast('데이터 수정 완료 💾', `'${name}' 법인의 변경사항이 안전하게 데이터베이스에 저장되었습니다.`);
+            render();
+        }
+
+        // 법인 데이터 안전 삭제
+        function deleteCompany(id) {
+            const company = AppState.companies.find(c => c.id === id);
+            if (!company) return;
+
+            if (!confirm(`정말로 [${company.name}] 법인을 디렉토리에서 영구 삭제하시겠습니까?`)) {
+                return;
+            }
+
+            AppState.companies = AppState.companies.filter(c => c.id !== id);
+            showToast('법인 영구 삭제됨 🗑️', `'${company.name}' 법인의 모든 정보와 트래킹 데이터가 일괄 삭제되었습니다.`);
+            render();
+        }
+
+        // 시스템 실행 진입점
+        initData();
+        render();
+    </script>
+</body>
+</html>
