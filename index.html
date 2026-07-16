@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ko" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>감정평가법인 디렉토리 - 포털 및 관리 통합망</title>
+    <title>감정평가법인 디렉토리 </title>
     
     <!-- Tailwind CSS & Google Fonts & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -196,7 +195,7 @@
 
     </main>
 
-    <!-- 푸터 및 관리자 토글 영역 -->
+    <!-- 푸터 영역 -->
     <footer class="bg-white border-t border-slate-150 py-8 w-full mt-12">
         <div class="max-w-5xl mx-auto px-4 sm:px-6">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -209,9 +208,6 @@
                     <span class="text-[10px] sm:text-xs text-slate-400 font-semibold">
                         © 2026 Appraisal Directory.
                     </span>
-                    <button onclick="toggleAdmin()" class="bg-transparent border-none text-[10px] sm:text-xs text-slate-300 hover:text-slate-500 cursor-pointer underline decoration-dotted transition-colors">
-                        관리자 메뉴
-                    </button>
                 </div>
             </div>
 
@@ -699,6 +695,14 @@
             showToast('법인 영구 삭제됨 🗑️', `'${company.name}' 법인의 모든 정보와 트래킹 데이터가 일괄 삭제되었습니다.`);
             render();
         }
+
+        // [비밀 기능] 키보드로 Ctrl + Shift + A 를 동시에 누르면 관리자 창이 뜹니다.
+        window.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A' || e.key === 'a') {
+                e.preventDefault(); // 브라우저 기본 단축키 충돌 방지
+                toggleAdmin(); // 관리자 토글 함수 실행
+            }
+        });
 
         // 시스템 실행 진입점
         initData();
