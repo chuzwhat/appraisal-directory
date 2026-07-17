@@ -610,33 +610,57 @@ console.log("렌더링 시도함. 현재 데이터 개수:", AppState.companies 
         }
 
         // 새 법인 등록 처리 함수
-async function addCompany() {
-            const name = document.getElementById('comp-name').value.trim();
-            const url = document.getElementById('comp-url').value.trim();
-            const address = document.getElementById('comp-address').value.trim();
-            const revenueNum = parseInt(document.getElementById('comp-revenue-num').value) || 0;
-            const revenue = document.getElementById('comp-revenue-text').value.trim();
-            const downloadUrl = document.getElementById('comp-download').value.trim();
+window.addCompany = async function() {
+    const name = document.getElementById('comp-name').value.trim();
+    const url = document.getElementById('comp-url').value.trim();
+    const address = document.getElementById('comp-address').value.trim();
+    const revenueNum = parseInt(document.getElementById('comp-revenue-num').value) || 0;
+    const revenue = document.getElementById('comp-revenue-text').value.trim();
+    const downloadUrl = document.getElementById('comp-download').value.trim();
 
-            if (!name || !url) {
-                return alert("법인명과 홈페이지 주소는 필수로 채워 넣어야 합니다.");
-            }
+    if (!name || !url) return alert("법인명과 홈페이지 주소는 필수입니다.");
 
-           const newCompany = {
-        id: Date.now().toString(), // Firebase용으로 id를 문자열로 변환
-        name, url, address, revenueNum, revenue, downloadUrl, clicks: 0
-    };
+    const newCompany = { id: Date.now().toString(), name, url, address, revenueNum, revenue, downloadUrl, clicks: 0 };
 
     try {
-        // Firebase에 추가
         await setDoc(doc(db, "companies", newCompany.id), newCompany);
         AppState.companies.push(newCompany);
         render();
+        // 폼 초기화
+        document.getElementById('comp-name').value = '';
+        document.getElementById('comp-url').value = '';
         showToast('법인 등록 완료 🎉', 'Firebase에 영구 저장되었습니다.');
     } catch (e) {
-        alert("저장에 실패했습니다. 다시 시도해주세요.");
+        alert("저장 실패: " + e.message);
     }
-}
+};
+// async function addCompany() {
+//             const name = document.getElementById('comp-name').value.trim();
+//             const url = document.getElementById('comp-url').value.trim();
+//             const address = document.getElementById('comp-address').value.trim();
+//             const revenueNum = parseInt(document.getElementById('comp-revenue-num').value) || 0;
+//             const revenue = document.getElementById('comp-revenue-text').value.trim();
+//             const downloadUrl = document.getElementById('comp-download').value.trim();
+
+//             if (!name || !url) {
+//                 return alert("법인명과 홈페이지 주소는 필수로 채워 넣어야 합니다.");
+//             }
+
+//            const newCompany = {
+//         id: Date.now().toString(), // Firebase용으로 id를 문자열로 변환
+//         name, url, address, revenueNum, revenue, downloadUrl, clicks: 0
+//     };
+
+//     try {
+//         // Firebase에 추가
+//         await setDoc(doc(db, "companies", newCompany.id), newCompany);
+//         AppState.companies.push(newCompany);
+//         render();
+//         showToast('법인 등록 완료 🎉', 'Firebase에 영구 저장되었습니다.');
+//     } catch (e) {
+//         alert("저장에 실패했습니다. 다시 시도해주세요.");
+//     }
+// }
 
             AppState.companies.push(newCompany);
             render();
@@ -725,6 +749,7 @@ import { getFirestore, collection, getDocs, doc, updateDoc, increment,
     window.increment = increment;
     window.setDoc = setDoc;     
     window.deleteDoc = deleteDoc;
+    window.openAdminModal = openAdminModal;
 
     // 데이터 가져오기
     async function loadData() {
