@@ -610,7 +610,7 @@ console.log("렌더링 시도함. 현재 데이터 개수:", AppState.companies 
         }
 
         // 새 법인 등록 처리 함수
-        function addCompany() {
+async function addCompany() {
             const name = document.getElementById('comp-name').value.trim();
             const url = document.getElementById('comp-url').value.trim();
             const address = document.getElementById('comp-address').value.trim();
@@ -622,16 +622,21 @@ console.log("렌더링 시도함. 현재 데이터 개수:", AppState.companies 
                 return alert("법인명과 홈페이지 주소는 필수로 채워 넣어야 합니다.");
             }
 
-            const newCompany = {
-                id: Date.now(),
-                name: name,
-                url: url,
-                address: address || "주소 미지정",
-                revenueNum: revenueNum,
-                revenue: revenue || `${revenueNum}억 원`,
-                downloadUrl: downloadUrl,
-                clicks: 0
-            };
+           const newCompany = {
+        id: Date.now().toString(), // Firebase용으로 id를 문자열로 변환
+        name, url, address, revenueNum, revenue, downloadUrl, clicks: 0
+    };
+
+    try {
+        // Firebase에 추가
+        await setDoc(doc(db, "companies", newCompany.id), newCompany);
+        AppState.companies.push(newCompany);
+        render();
+        showToast('법인 등록 완료 🎉', 'Firebase에 영구 저장되었습니다.');
+    } catch (e) {
+        alert("저장에 실패했습니다. 다시 시도해주세요.");
+    }
+}
 
             AppState.companies.push(newCompany);
             render();
@@ -648,7 +653,7 @@ console.log("렌더링 시도함. 현재 데이터 개수:", AppState.companies 
         }
 
         // 기존 법인 데이터 수정 반영
-        function updateCompany(id) {
+async function updateCompany(id) {
             const name = document.getElementById(`edit-name-${id}`).value.trim();
             const url = document.getElementById(`edit-url-${id}`).value.trim();
             const address = document.getElementById(`edit-addr-${id}`).value.trim();
@@ -656,34 +661,33 @@ console.log("렌더링 시도함. 현재 데이터 개수:", AppState.companies 
             const revenue = document.getElementById(`edit-revtxt-${id}`).value.trim();
             const downloadUrl = document.getElementById(`edit-down-${id}`).value.trim();
 
-            if (!name || !url) {
-                return alert("수정 시 법인명과 홈페이지 주소는 공백으로 남겨둘 수 없습니다.");
-            }
+const updatedData = { name, url, address, revenueNum, revenue, downloadUrl };
 
-            AppState.companies = AppState.companies.map(c => {
-                if (c.id === id) {
-                    return { ...c, name, url, address, revenueNum, revenue, downloadUrl };
-                }
-                return c;
-            });
-
-            showToast('데이터 수정 완료 💾', `'${name}' 법인의 변경사항이 안전하게 데이터베이스에 저장되었습니다.`);
-            render();
-        }
+    try {
+        // Firebase 수정
+        await updateDoc(doc(db, "companies", id.toString()), updatedData);
+        AppState.companies = AppState.companies.map(c => c.id == id ? { ...c, ...updatedData } : c);
+        render();
+        showToast('데이터 수정 완료 💾', '서버에 반영되었습니다.');
+    } catch (e) {
+        alert("수정에 실패했습니다.");
+    }
+}
 
         // 법인 데이터 안전 삭제
-        function deleteCompany(id) {
-            const company = AppState.companies.find(c => c.id === id);
-            if (!company) return;
+ async function deleteCompany(id) {
+    if (!confirm("정말 삭제하시겠습니까?")) return;
 
-            if (!confirm(`정말로 [${company.name}] 법인을 디렉토리에서 영구 삭제하시겠습니까?`)) {
-                return;
-            }
-
-            AppState.companies = AppState.companies.filter(c => c.id !== id);
-            showToast('법인 영구 삭제됨 🗑️', `'${company.name}' 법인의 모든 정보와 트래킹 데이터가 일괄 삭제되었습니다.`);
-            render();
-        }
+    try {
+        // Firebase 삭제
+        await deleteDoc(doc(db, "companies", id.toString()));
+        AppState.companies = AppState.companies.filter(c => c.id != id);
+        render();
+        showToast('법인 삭제 완료 🗑️', '서버에서 제거되었습니다.');
+    } catch (e) {
+        alert("삭제에 실패했습니다.");
+    }
+}
 
         // [비밀 기능] 키보드로 Ctrl + Shift + A 를 동시에 누르면 관리자 창이 뜹니다.
         window.addEventListener('keydown', function(e) {
@@ -697,9 +701,9 @@ console.log("렌더링 시도함. 현재 데이터 개수:", AppState.companies 
         initData();
         render();
 // Firebase 데이터 연동 및 통합 로직
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, updateDoc, increment, 
+    setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
     const firebaseConfig = {
         apiKey: "AIzaSyDjMCSvKdTVC_K-Vw_GbFZviddreKOFCew",
         authDomain: "appraisal-directory-4b333.firebaseapp.com",
@@ -718,6 +722,8 @@ console.log("렌더링 시도함. 현재 데이터 개수:", AppState.companies 
     window.doc = doc;
     window.updateDoc = updateDoc;
     window.increment = increment;
+    window.setDoc = setDoc;     
+    window.deleteDoc = deleteDoc;
 
     // 데이터 가져오기
     async function loadData() {
