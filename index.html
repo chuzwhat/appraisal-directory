@@ -690,12 +690,13 @@ const updatedData = { name, url, address, revenueNum, revenue, downloadUrl };
 }
 
         // [비밀 기능] 키보드로 Ctrl + Shift + A 를 동시에 누르면 관리자 창이 뜹니다.
-        window.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.shiftKey && e.key === 'A' || e.key === 'a') {
-                e.preventDefault(); // 브라우저 기본 단축키 충돌 방지
-                toggleAdmin(); // 관리자 토글 함수 실행
-            }
-        });
+  window.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+        e.preventDefault(); // 다른 브라우저 기능 방지
+        console.log("관리자 모드 호출 시도"); // 이 메시지가 콘솔에 뜨는지 보세요
+        openAdminModal(); // 함수 호출
+    }
+});
 
         // 시스템 실행 진입점
         initData();
