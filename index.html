@@ -328,7 +328,8 @@ function initData() {
     }
     render(); // 데이터를 가져온 후 반드시 실행
 }
-
+// 그리고 코드 제일 밑에 이 함수를 실행하는 명령어가 있는지 확인하세요
+initData();
         // 검색어 가공 및 연동
         function filterCompanies() {
             AppState.searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
