@@ -381,16 +381,20 @@
         }
 
         // 클릭 이벤트 핸들링 (클릭수 증산 및 로컬 스토리지 보존)
-        function addClick(id) {
-            AppState.companies = AppState.companies.map(c => {
-                if (c.id === id) {
-                    return { ...c, clicks: (c.clicks || 0) + 1 };
-                }
-                return c;
-            });
-            localStorage.setItem('companies', JSON.stringify(AppState.companies));
-            setTimeout(render, 150);
-        }
+       async function addClick(id) {
+    // Firebase가 연결되어 있다면 db를 사용
+    if (window.db) {
+        const companyRef = window.doc(window.db, "companies", id);
+        await window.updateDoc(companyRef, {
+            clicks: window.increment(1)
+        });
+        alert("클릭이 반영되었습니다.");
+        location.reload(); 
+    } else {
+        // 혹시라도 연결이 안 됐을 경우를 대비한 기존 방식
+        console.log("로컬 모드 실행");
+    }
+}
 
         // 공용 렌더링 엔진 (메인 카드 그리드 + 관리자 테이블)
         function render() {
@@ -707,5 +711,28 @@
         initData();
         render();
     </script>
+    
+    <!-- 여기부터 복사해서 맨 아래에 붙이세요 -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDjMCSvKdTVC_K-Vw_GbFZviddreKOFCew",
+        authDomain: "appraisal-directory-4b333.firebaseapp.com",
+        projectId: "appraisal-directory-4b333",
+        storageBucket: "appraisal-directory-4b333.firebasestorage.app",
+        messagingSenderId: "57634472408",
+        appId: "1:57634472408:web:72f02ffb66764e20d632ad",
+        measurementId: "G-1ZRRP8ZT19"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    window.db = getFirestore(app);
+    window.doc = doc;
+    window.updateDoc = updateDoc;
+    window.increment = increment;
+    
+    console.log("Firebase 연결 성공!");
 </body>
 </html>
