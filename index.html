@@ -251,7 +251,7 @@ import {
     setDoc, updateDoc, deleteDoc, increment
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import {
-    getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider
+    getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
@@ -277,7 +277,9 @@ const AppState = {
     isAdmin: false,     // 관리자 패널 표시 여부 (UI용)
     signedIn: false     // 실제 쓰기 권한 (Firebase Auth)
 };
-
+    
+const ADMIN_EMAIL = 'chuzwhat@gmail.com';   // ← 이 줄 추가
+    
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, m => (
     { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[m]
 ));
@@ -512,21 +514,47 @@ async function deleteCompany(id) {
     }
 }
 
-function toggleAdmin() {
-    AppState.isAdmin = !AppState.isAdmin;
-    document.getElementById('admin-panel').classList.toggle('hidden', !AppState.isAdmin);
+async function toggleAdmin() {
     if (AppState.isAdmin) {
-        showToast('관리자 패널 열림 🔐', '쓰기 작업은 구글 로그인 후에만 반영됩니다.');
-        setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 200);
+        AppState.isAdmin = false;
+        document.getElementById('admin-panel').classList.add('hidden');
+        render();
+        return;
     }
+
+    if (!AppState.signedIn) {
+        try {
+            const provider = new GoogleAuthProvider();
+            provider.setCustomParameters({ prompt: 'select_account' });
+            const cred = await signInWithPopup(auth, provider);
+            if (cred.user.email !== ADMIN_EMAIL) {
+                await signOut(auth);
+                return alert("관리자 계정이 아닙니다.");
+            }
+        } catch (e) {
+            return alert("로그인 실패: " + e.code);
+        }
+    }
+
+    AppState.isAdmin = true;
+    document.getElementById('admin-panel').classList.remove('hidden');
+    showToast('관리자 모드 🔐', '등록 및 수정/삭제 권한이 활성화되었습니다.');
+    setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 200);
     render();
 }
 
 onAuthStateChanged(auth, (user) => {
-    AppState.signedIn = !!user;
+    AppState.signedIn = !!user && user.email === ADMIN_EMAIL;
+
+    // 관리자가 아닌데 패널이 열려 있으면 강제로 닫기
+    if (!AppState.signedIn && AppState.isAdmin) {
+        AppState.isAdmin = false;
+        document.getElementById('admin-panel').classList.add('hidden');
+    }
+
     const badge = document.getElementById('admin-auth-state');
-    badge.textContent = user ? `로그인됨: ${user.email}` : '로그인 필요 (읽기 전용)';
-    badge.className = user
+    badge.textContent = AppState.signedIn ? `로그인됨: ${user.email}` : '로그인 필요 (읽기 전용)';
+    badge.className = AppState.signedIn
         ? "bg-emerald-500/10 text-emerald-600 text-[10px] font-bold px-2 py-0.5 rounded-full"
         : "bg-rose-500/10 text-rose-600 text-[10px] font-bold px-2 py-0.5 rounded-full";
 });
