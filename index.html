@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>감정평가법인 디렉토리 - 포털 및 관리 통합망</title>
-    
-    <!-- Tailwind CSS & Google Fonts & FontAwesome Icons -->
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -15,16 +14,10 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Inter', 'Noto Sans KR', 'sans-serif'] },
                     colors: {
                         tossBlue: {
-                            50: '#f2f8ff',
-                            100: '#e1f0ff',
-                            500: '#3182f6',
-                            600: '#1b64da',
-                            700: '#0f4cb3',
+                            50: '#f2f8ff', 100: '#e1f0ff', 500: '#3182f6', 600: '#1b64da', 700: '#0f4cb3',
                         }
                     }
                 }
@@ -33,13 +26,8 @@
     </script>
 
     <style>
-        body {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            background-color: #f8fafc;
-        }
-        .custom-shadow {
-            box-shadow: 0 4px 20px -2px rgba(148, 163, 184, 0.08), 0 2px 8px -1px rgba(148, 163, 184, 0.06);
-        }
+        body { font-family: 'Inter', 'Noto Sans KR', sans-serif; background-color: #f8fafc; }
+        .custom-shadow { box-shadow: 0 4px 20px -2px rgba(148, 163, 184, 0.08), 0 2px 8px -1px rgba(148, 163, 184, 0.06); }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50/50 min-h-screen flex flex-col justify-between">
@@ -47,22 +35,15 @@
     <!-- 상단 네비게이션 바 -->
     <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between relative">
-            <!-- 데스크톱 좌우 대칭용 레이아웃 분할기 -->
-            <div class="hidden sm:block w-24"></div> 
-            
-            <!-- 완벽히 가운데 정렬되고 눈에 띄게 큰 로고/텍스트 영역 -->
+            <div class="hidden sm:block w-24"></div>
             <div class="flex items-center space-x-3 mx-auto sm:absolute sm:left-1/2 sm:-translate-x-1/2">
                 <div class="w-10 h-10 bg-tossBlue-500 rounded-xl flex items-center justify-center text-white text-lg shadow-md transition-transform hover:scale-105">
                     <i class="fa-solid fa-file-invoice-dollar"></i>
                 </div>
-                <span class="text-lg sm:text-2xl font-black tracking-tight text-slate-950">
-                    감정평가법인 디렉토리
-                </span>
+                <span class="text-lg sm:text-2xl font-black tracking-tight text-slate-950">감정평가법인 디렉토리</span>
             </div>
-            
-            <!-- 공유하기 버튼 -->
             <div class="flex items-center shrink-0">
-                <button onclick="copyShareLink()" class="flex items-center space-x-1.5 bg-tossBlue-50 hover:bg-tossBlue-100 text-tossBlue-500 px-3.5 py-2 rounded-xl text-xs font-bold transition-all border-none">
+                <button id="share-btn" class="flex items-center space-x-1.5 bg-tossBlue-50 hover:bg-tossBlue-100 text-tossBlue-500 px-3.5 py-2 rounded-xl text-xs font-bold transition-all border-none">
                     <i class="fa-solid fa-share-nodes"></i>
                     <span class="hidden sm:inline">공유하기</span>
                 </button>
@@ -70,10 +51,9 @@
         </div>
     </header>
 
-    <!-- 공지사항 및 메인 안내 섹션 (디렉토리 타이틀 아래로 정보 박스 수평 재배치) -->
+    <!-- 공지사항 및 메인 안내 섹션 -->
     <section class="bg-white border-b border-slate-150 py-8 sm:py-10">
         <div class="max-w-5xl mx-auto px-4 sm:px-6">
-            <!-- 타이틀 및 소개글 -->
             <div class="text-left">
                 <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 leading-tight">
                     감정평가법인 <span class="text-tossBlue-500">디렉토리</span>
@@ -82,116 +62,87 @@
                     13개 대형 감정평가법인의 홈페이지, 자기소개서 양식, 영업수익, 본사 소재지를 한 번에 파악할 수 있는 포털입니다.
                 </p>
             </div>
-            
-            <!-- 하단 수평 그리드: 와이드 화면 가로 밸런스 개선 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8 pt-6 border-t border-slate-100">
-                
-                <!-- 1. 자료 출처 및 유의사항 박스 -->
-<div class="bg-white border border-slate-200/80 rounded-2xl p-5 custom-shadow flex flex-col justify-between">
-    <div>
-        <div class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
-            <i class="fa-solid fa-circle-info text-tossBlue-500 text-sm"></i>
-            <span>자료 출처 및 유의사항</span>
-        </div>
-        <div class="text-xs sm:text-sm text-slate-600 mt-3 space-y-2.5 leading-relaxed font-medium">
-            <p>• <strong>자기소개서 :</strong> 각 법인의 홈페이지에서 확인 가능한 자기소개서이며, 반드시 개별 확인을 거쳐 활용하시기 바랍니다.</p>
-            <p>• <strong>자소서 최신 업데이트 :</strong> 2026년 7월</p>
-            <p>• <strong>영업수익 :</strong> 각 법인의 경영공시(2025 손익계산서) 자료를 기준하였으며, 억 단위 미만 절사하였습니다.</p>
-        </div>
-    </div>
-</div>
 
-<!-- 2. 문의 및 제보 박스 (수정된 부분) -->
-<div class="bg-slate-50 border border-slate-200/60 rounded-2xl p-5 custom-shadow flex flex-col justify-between">
-    <div>
-        <div class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
-            <i class="fa-solid fa-bullhorn text-amber-500 text-sm"></i>
-            <span>문의 및 제보</span>
-        </div>
-        <div class="text-xs sm:text-sm text-slate-600 mt-3 space-y-3 leading-relaxed font-medium">
-            <p>데이터 오류 제보나 수정 요청, 문의사항이 있으시면 아래 이메일을 통해 전달해 주세요.</p>
-            
-            <div class="flex items-center justify-between gap-3 bg-white border border-slate-200/80 rounded-xl p-3 shadow-sm">
-                <span class="font-normal text-slate-800 tracking-tight text-xs sm:text-sm select-all">chuzwhat@gmail.com</span>
-                <div class="flex items-center gap-1.5 shrink-0">
-                    <button onclick="copyEmail()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 p-2 rounded-lg text-xs font-bold transition-all border-none flex items-center justify-center cursor-pointer" title="이메일 주소 복사">
-                        <i class="fa-regular fa-copy"></i>
-                    </button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8 pt-6 border-t border-slate-100">
+                <div class="bg-white border border-slate-200/80 rounded-2xl p-5 custom-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-tossBlue-500 text-sm"></i>
+                            <span>자료 출처 및 유의사항</span>
+                        </div>
+                        <div class="text-xs sm:text-sm text-slate-600 mt-3 space-y-2.5 leading-relaxed font-medium">
+                            <p>• <strong>자기소개서 :</strong> 각 법인의 홈페이지에서 확인 가능한 자기소개서이며, 반드시 개별 확인을 거쳐 활용하시기 바랍니다.</p>
+                            <p>• <strong>자소서 최신 업데이트 :</strong> 2026년 7월</p>
+                            <p>• <strong>영업수익 :</strong> 각 법인의 경영공시(2025 손익계산서) 자료를 기준하였으며, 억 단위 미만 절사하였습니다.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <a href="mailto:chuzwhat@gmail.com?subject=[감평법인 디렉토리 문의 및 제보]" class="mt-4 inline-flex items-center justify-center gap-2 bg-tossBlue-500 hover:bg-tossBlue-600 text-white py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all w-full text-center shadow-sm decoration-none">
-        <i class="fa-solid fa-envelope text-xs"></i>
-        <span>이메일 보내기</span>
+
+                <div class="bg-slate-50 border border-slate-200/60 rounded-2xl p-5 custom-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-bullhorn text-amber-500 text-sm"></i>
+                            <span>문의 및 제보</span>
+                        </div>
+                        <div class="text-xs sm:text-sm text-slate-600 mt-3 space-y-3 leading-relaxed font-medium">
+                            <p>데이터 오류 제보나 수정 요청, 문의사항이 있으시면 아래 이메일을 통해 전달해 주세요.</p>
+                            <div class="flex items-center justify-between gap-3 bg-white border border-slate-200/80 rounded-xl p-3 shadow-sm">
+                                <span class="font-normal text-slate-800 tracking-tight text-xs sm:text-sm select-all">chuzwhat@gmail.com</span>
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    <button id="copy-email-btn" class="bg-slate-100 hover:bg-slate-200 text-slate-600 p-2 rounded-lg text-xs font-bold transition-all border-none flex items-center justify-center cursor-pointer" title="이메일 주소 복사">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="mailto:chuzwhat@gmail.com?subject=[감평법인 디렉토리 문의 및 제보]" class="mt-4 inline-flex items-center justify-center gap-2 bg-tossBlue-500 hover:bg-tossBlue-600 text-white py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all w-full text-center shadow-sm decoration-none">
+                        <i class="fa-solid fa-envelope text-xs"></i>
+                        <span>이메일 보내기</span>
                     </a>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- 메인 콘텐츠 영역 -->
     <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 w-full flex-grow">
-        
-        <!-- 실시간 필터 및 검색 바 -->
+
         <div class="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 custom-shadow space-y-4 mb-8">
             <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
                 <i class="fa-solid fa-sliders"></i>
                 <span>실시간 필터 및 정렬 방식</span>
             </div>
             <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-                
-                <!-- 검색창 -->
                 <div class="relative flex-grow">
                     <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                         <i class="fa-solid fa-magnifying-glass text-xs"></i>
                     </span>
-                    <input type="text" id="search-input" oninput="filterCompanies()" class="block w-full pl-10 pr-4 py-2.5 bg-slate-50/80 border border-slate-100 focus:border-tossBlue-500 focus:bg-white focus:ring-4 focus:ring-tossBlue-500/10 rounded-xl text-xs sm:text-sm font-medium transition-all" placeholder="법인명 또는 소재지로 실시간 검색...">
+                    <input type="text" id="search-input" class="block w-full pl-10 pr-4 py-2.5 bg-slate-50/80 border border-slate-100 focus:border-tossBlue-500 focus:bg-white focus:ring-4 focus:ring-tossBlue-500/10 rounded-xl text-xs sm:text-sm font-medium transition-all" placeholder="법인명 또는 소재지로 실시간 검색...">
                 </div>
 
-                <!-- 정렬 및 뷰 전환 컨트롤 그룹 -->
                 <div class="flex flex-wrap items-center gap-3">
-                    <!-- 정렬 조건 -->
                     <div class="flex bg-slate-100 p-1 rounded-xl border border-slate-200/50">
-                        <button id="sort-rev-btn" onclick="changeSort('revenue')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none">
-                            📊 영업수익 순
-                        </button>
-                        <button id="sort-cli-btn" onclick="changeSort('clicks')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent">
-                            🖱️ 클릭수 순
-                        </button>
+                        <button id="sort-rev-btn" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none">📊 영업수익 순</button>
+                        <button id="sort-cli-btn" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent">🖱️ 클릭수 순</button>
                     </div>
-
-                    <!-- 뷰 모드 -->
                     <div class="flex bg-slate-100 p-1 rounded-xl border border-slate-200/50">
-                        <button id="view-grid-btn" onclick="changeView('grid')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none">
-                            <i class="fa-solid fa-table-cells-large mr-1"></i>격자형
-                        </button>
-                        <button id="view-list-btn" onclick="changeView('list')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent">
-                            <i class="fa-solid fa-list mr-1"></i>가로형
-                        </button>
+                        <button id="view-grid-btn" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none"><i class="fa-solid fa-table-cells-large mr-1"></i>격자형</button>
+                        <button id="view-list-btn" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent"><i class="fa-solid fa-list mr-1"></i>가로형</button>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- 콘텐츠 구분을 위한 법인 목록 영역 타이틀 -->
         <div class="flex items-center justify-between mb-4 px-1">
             <h2 class="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
                 <i class="fa-solid fa-building text-slate-400"></i>
                 <span>등록 법인 디렉토리</span>
-                <span id="company-count" class="bg-tossBlue-50 text-tossBlue-600 px-2.5 py-0.5 rounded-full text-[10px] font-black border border-tossBlue-100">
-                    -
-                </span>
+                <span id="company-count" class="bg-tossBlue-50 text-tossBlue-600 px-2.5 py-0.5 rounded-full text-[10px] font-black border border-tossBlue-100">-</span>
             </h2>
         </div>
 
-        <!-- 법인 목록 카드/리스트 렌더링 컨테이너 -->
-        <div id="company-list" class="grid gap-4 transition-all duration-300">
-            <!-- JavaScript를 통해 가로형/격자형 템플릿이 동적 렌더링됩니다 -->
-        </div>
-
+        <div id="company-list" class="grid gap-4 transition-all duration-300"></div>
     </main>
 
     <!-- 푸터 영역 -->
@@ -202,27 +153,21 @@
                     <h3 class="text-slate-950 font-bold text-xs sm:text-sm">감정평가법인 디렉토리 포털</h3>
                     <p class="text-[10px] sm:text-xs text-slate-400 mt-1">본 서비스는 공공 공시 자료 및 채용 요강을 기반으로 학습·정보공유를 목적으로 제작되었습니다.</p>
                 </div>
-                
                 <div class="flex items-center space-x-4">
-                    <span class="text-[10px] sm:text-xs text-slate-400 font-semibold">
-                        © 2026 Appraisal Directory.
-                    </span>
+                    <span class="text-[10px] sm:text-xs text-slate-400 font-semibold">© 2026 Appraisal Directory.</span>
                 </div>
             </div>
 
-            <!-- 대시보드형 관리자 패널 영역 (비밀번호: 1234) -->
+            <!-- 관리자 패널 (Ctrl + Shift + A) -->
             <div id="admin-panel" class="hidden mt-8 bg-slate-50 border border-dashed border-slate-300 rounded-2xl p-5 sm:p-6 text-left">
                 <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-5">
                     <h3 class="text-slate-900 font-extrabold text-sm sm:text-base flex items-center gap-1.5">
                         <i class="fa-solid fa-screwdriver-wrench text-tossBlue-500"></i>
                         <span>새 법인 정보 등록</span>
                     </h3>
-                    <span class="bg-tossBlue-500/10 text-tossBlue-600 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                        Admin Mode Active
-                    </span>
+                    <span id="admin-auth-state" class="bg-tossBlue-500/10 text-tossBlue-600 text-[10px] font-bold px-2 py-0.5 rounded-full">Admin Mode Active</span>
                 </div>
 
-                <!-- 새 법인 등록 폼 그리드 -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
                     <div>
                         <label class="block text-[11px] font-bold text-slate-500 mb-1">법인명 (예: 미래새한)</label>
@@ -250,19 +195,20 @@
                     </div>
                 </div>
 
-                <div class="flex justify-end mb-8">
-                    <button onclick="addCompany()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-6 rounded-xl transition-colors border-none cursor-pointer">
+                <div class="flex justify-end gap-2 mb-8">
+                    <button id="admin-login-btn" class="bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold text-xs py-2.5 px-4 rounded-xl transition-colors cursor-pointer">
+                        <i class="fa-solid fa-right-to-bracket mr-1"></i> 구글 로그인
+                    </button>
+                    <button id="add-company-btn" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-6 rounded-xl transition-colors border-none cursor-pointer">
                         <i class="fa-solid fa-plus mr-1"></i> 법인 등록완료
                     </button>
                 </div>
 
-                <!-- 기존 법인 리스트 데이터 수정 테이블 -->
                 <div class="border-t border-slate-200 pt-5">
                     <h3 class="text-slate-900 font-extrabold text-sm sm:text-base mb-4 flex items-center gap-1.5">
                         <i class="fa-solid fa-pen-to-square text-tossBlue-500"></i>
                         <span>기존 등록 법인 데이터 수정 / 삭제</span>
                     </h3>
-                    
                     <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>
@@ -276,18 +222,15 @@
                                     <th class="p-3" style="width: 110px; text-align: center;">기능</th>
                                 </tr>
                             </thead>
-                            <tbody id="admin-table-body" class="divide-y divide-slate-100">
-                                <!-- JS 동적 생성 -->
-                            </tbody>
+                            <tbody id="admin-table-body" class="divide-y divide-slate-100"></tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
         </div>
     </footer>
 
-    <!-- 알림 팝업 토스트 (공유 완료 / 시스템 액션 알림) -->
+    <!-- 토스트 -->
     <div id="alert-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300">
         <div class="bg-slate-950 text-white rounded-xl px-4 py-3 shadow-2xl flex items-center space-x-2.5 max-w-sm border border-slate-800">
             <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs flex-shrink-0">
@@ -300,497 +243,352 @@
         </div>
     </div>
 
-    <!-- 스크립트 비즈니스 로직 -->
-    <script type="module">
+<script type="module">
+/* ===================== Firebase 초기화 (딱 한 번만) ===================== */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+    getFirestore, collection, doc, onSnapshot,
+    setDoc, updateDoc, deleteDoc, increment
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+    getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-        let AppState = {
-            companies: [],
-        };
-
-        // 데이터 초기화 및 로컬 스토리지 동기화
-function initData() {
-    // 1. 임시 데이터 (이게 있어야 화면이 나옵니다)
-    const mockData = [
-        { id: 1, name: "테스트법인", url: "#", address: "서울시 강남구", revenue: "100억", revenueNum: 100, clicks: 0, downloadUrl: "#" }
-    ];
-
-    const saved = localStorage.getItem('companies');
-    
-    if (saved) {
-        try {
-            AppState.companies = JSON.parse(saved);
-        } catch (e) {
-            AppState.companies = mockData;
-        }
-    } else {
-        AppState.companies = mockData; // 데이터가 없으면 임시 데이터를 씀
-        localStorage.setItem('companies', JSON.stringify(AppState.companies));
-    }
-    render(); // 데이터를 가져온 후 반드시 실행
-}
-
-        // 검색어 가공 및 연동
-        function filterCompanies() {
-            AppState.searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
-            render();
-        }
-
-        // 정렬 모드 전환 및 활성버튼 스타일 토글
-        function changeSort(type) {
-            AppState.currentSort = type;
-            const sortRevBtn = document.getElementById('sort-rev-btn');
-            const sortCliBtn = document.getElementById('sort-cli-btn');
-
-            if (type === 'revenue') {
-                sortRevBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none";
-                sortCliBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent";
-            } else {
-                sortRevBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent";
-                sortCliBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none";
-            }
-            render();
-        }
-
-        // 뷰 모드 전환 (격자형 vs 가로형)
-        function changeView(mode) {
-            AppState.currentView = mode;
-            const viewGridBtn = document.getElementById('view-grid-btn');
-            const viewListBtn = document.getElementById('view-list-btn');
-
-            if (mode === 'grid') {
-                viewGridBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none";
-                viewListBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent";
-            } else {
-                viewGridBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent";
-                viewListBtn.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none";
-            }
-            render();
-        }
-
-        // 클릭 이벤트 핸들링 (클릭수 증산 및 로컬 스토리지 보존)
-       async function addClick(id) {
-    // Firebase가 연결되어 있다면 db를 사용
-    if (window.db) {
-        const companyRef = window.doc(window.db, "companies", id);
-        await window.updateDoc(companyRef, {
-            clicks: window.increment(1)
-        });
-        alert("클릭이 반영되었습니다.");
-        location.reload(); 
-    } else {
-        // 혹시라도 연결이 안 됐을 경우를 대비한 기존 방식
-        console.log("로컬 모드 실행");
-    }
-}
-
-        // 공용 렌더링 엔진 (메인 카드 그리드 + 관리자 테이블)
-// 공용 렌더링 엔진 (메인 카드 그리드 + 관리자 테이블)
-        function render() {
-            let displayed = [...AppState.companies];
-
-            // 1. 소팅 전개
-            if (AppState.currentSort === 'revenue') {
-                displayed.sort((a, b) => b.revenueNum - a.revenueNum);
-            } else {
-                displayed.sort((a, b) => (b.clicks || 0) - (a.clicks || 0));
-            }
-
-            // 2. 검색 필터링
-            if (AppState.searchQuery) {
-                displayed = displayed.filter(c => 
-                    c.name.toLowerCase().includes(AppState.searchQuery) ||
-                    c.address.toLowerCase().includes(AppState.searchQuery)
-                );
-            }
-
-            // 실시간 법인 개수 업데이트
-            const countBadge = document.getElementById('company-count');
-            if (countBadge) {
-                countBadge.textContent = `${displayed.length}개 법인 노출 중`;
-            }
-
-            const container = document.getElementById('company-list');
-            container.innerHTML = ''; 
-
-            // 3. 레이아웃에 따른 컨테이너 구조 변경
-            if (AppState.currentView === 'grid') {
-                container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4";
-            } else {
-                container.className = "flex flex-col gap-3";
-            }
-
-            if (displayed.length === 0) {
-                container.innerHTML = `
-                    <div class="col-span-full py-16 text-center text-slate-400 text-xs font-medium bg-white rounded-2xl border border-slate-100 shadow-sm">
-                        <i class="fa-solid fa-folder-open text-3xl mb-3 block text-slate-300"></i>
-                        현재 일치하거나 등록된 법인 정보가 없습니다.
-                    </div>
-                `;
-            } else {
-                displayed.forEach(company => {
-                    const card = document.createElement('div');
-                    
-                    const adminClicksBadge = AppState.isAdmin
-                        ? `<span class="bg-red-50 text-red-600 font-extrabold text-[10px] px-2 py-0.5 rounded-md flex items-center gap-1 shrink-0">
-                               <i class="fa-solid fa-lock text-[8px]"></i> 클릭수: ${company.clicks || 0}회
-                           </span>`
-                        : '';
-
-                    const downloadBtn = company.downloadUrl 
-                        ? `<a href="${company.downloadUrl}" target="_blank" class="py-2.5 bg-tossBlue-500 hover:bg-tossBlue-600 text-white font-bold text-xs text-center rounded-xl transition-colors flex items-center justify-center gap-1.5 border-none decoration-none">
-                               <i class="fa-solid fa-file-arrow-down text-[10px]"></i>자소서 다운로드
-                           </a>`
-                        : `<div class="py-2.5 bg-slate-100 text-slate-400 font-bold text-xs text-center rounded-xl cursor-not-allowed flex items-center justify-center gap-1.5">
-                               자소서 준비중
-                           </div>`;
-
-                    if (AppState.currentView === 'grid') {
-                        card.className = "bg-white border border-slate-200/60 rounded-2xl p-5 custom-shadow hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between min-h-[215px] h-auto";
-                        card.innerHTML = `
-                            <div class="space-y-2.5">
-                                <div class="flex items-center justify-between gap-2">
-                                    <h3 class="text-base sm:text-lg font-black text-slate-900 truncate">
-                                        <a href="${company.url}" target="_blank" onclick="addClick(${company.id})" class="text-slate-900 hover:text-tossBlue-500 transition-colors decoration-none">
-                                            ${company.name}
-                                        </a>
-                                    </h3>
-                                    ${adminClicksBadge}
-                                </div>
-                                <div class="space-y-1">
-                                    <div class="text-xs sm:text-sm text-slate-900 font-extrabold flex items-center gap-1.5">
-                                        <span class="text-slate-400 font-medium text-[11px] sm:text-xs shrink-0">영업수익</span>
-                                        <span>${company.revenueNum > 0 ? company.revenue : '공시 준비중'}</span>
-                                    </div>
-                                    <div class="text-xs sm:text-[13px] text-slate-500 font-medium flex items-start gap-1.5 leading-relaxed">
-                                        <i class="fa-solid fa-location-dot text-slate-300 shrink-0 mt-0.5"></i>
-                                        <span class="break-keep whitespace-normal">${company.address}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-50 mt-3">
-                                <a href="${company.url}" target="_blank" onclick="addClick(${company.id})" class="py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs text-center rounded-xl transition-colors flex items-center justify-center gap-1 border-none decoration-none">
-                                    홈페이지 <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-slate-400"></i>
-                                </a>
-                                ${downloadBtn}
-                            </div>
-                        `;
-                    } else {
-                        card.className = "bg-white border border-slate-200/60 rounded-2xl p-4 custom-shadow hover:-translate-y-0.5 transition-all duration-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4";
-                        card.innerHTML = `
-                            <div class="flex-grow space-y-2">
-                                <div class="flex items-center gap-3">
-                                    <h3 class="text-base sm:text-lg font-black text-slate-900">
-                                        <a href="${company.url}" target="_blank" onclick="addClick(${company.id})" class="text-slate-900 hover:text-tossBlue-500 transition-colors decoration-none">
-                                            ${company.name}
-                                        </a>
-                                    </h3>
-                                    ${adminClicksBadge}
-                                </div>
-                                <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                                    <div class="text-xs sm:text-sm text-slate-900 font-extrabold flex items-center gap-1.5">
-                                        <span class="text-slate-400 font-medium text-[11px] sm:text-xs shrink-0">영업수익</span>
-                                        <span>${company.revenueNum > 0 ? company.revenue : '공시 준비중'}</span>
-                                    </div>
-                                    <div class="text-xs sm:text-[13px] text-slate-500 font-medium truncate flex items-center gap-1">
-                                        <i class="fa-solid fa-location-dot text-slate-300 shrink-0"></i>
-                                        <span>${company.address}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-2 shrink-0 self-stretch sm:self-auto sm:w-[260px]">
-                                <a href="${company.url}" target="_blank" onclick="addClick(${company.id})" class="flex-1 py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs text-center rounded-xl transition-colors flex items-center justify-center gap-1 border-none decoration-none">
-                                    홈페이지 <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-slate-400"></i>
-                                </a>
-                                <div class="flex-1 shrink-0">
-                                    ${downloadBtn}
-                                </div>
-                            </div>
-                        `;
-                    }
-                    container.appendChild(card);
-                });
-            }
-
-            // 4. 관리자 테이블 수정 영역 동적 생성
-            if (AppState.isAdmin) {
-                const adminTableBody = document.getElementById('admin-table-body');
-                adminTableBody.innerHTML = '';
-                
-                AppState.companies.forEach(company => {
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-slate-50/50 transition-colors";
-                    tr.innerHTML = `
-                        <td class="p-2 border-r border-slate-100"><input type="text" id="edit-name-${company.id}" value="${company.name}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none"></td>
-                        <td class="p-2 border-r border-slate-100"><input type="url" id="edit-url-${company.id}" value="${company.url}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none"></td>
-                        <td class="p-2 border-r border-slate-100"><input type="text" id="edit-addr-${company.id}" value="${company.address}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none"></td>
-                        <td class="p-2 border-r border-slate-100"><input type="number" id="edit-revnum-${company.id}" value="${company.revenueNum}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none text-right"></td>
-                        <td class="p-2 border-r border-slate-100"><input type="text" id="edit-revtxt-${company.id}" value="${company.revenue}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none"></td>
-                        <td class="p-2 border-r border-slate-100"><input type="url" id="edit-down-${company.id}" value="${company.downloadUrl}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none"></td>
-                        <td class="p-2">
-                            <div class="flex items-center justify-center gap-1">
-                                <button onclick="updateCompany(${company.id})" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-[11px] py-1.5 px-2.5 rounded-lg transition-colors border-none cursor-pointer">저장</button>
-                                <button onclick="deleteCompany(${company.id})" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-[11px] py-1.5 px-2.5 rounded-lg transition-colors border-none cursor-pointer">삭제</button>
-                            </div>
-                        </td>
-                    `;
-                    adminTableBody.appendChild(tr);
-                });
-            }
-// render 함수 코드 끝나는 지점 바로 밑에 추가
-console.log("렌더링 시도함. 현재 데이터 개수:", AppState.companies ? AppState.companies.length : "데이터 없음");
-
-            
-            // 로컬 스토리지 데이터 동기화
-            localStorage.setItem('companies', JSON.stringify(AppState.companies));
-        }
-
-        // 토스트 알림 띄우기 유틸리티
-        function showToast(title, body) {
-            const toast = document.getElementById('alert-toast');
-            document.getElementById('toast-title').textContent = title;
-            document.getElementById('toast-body').textContent = body;
-
-            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-            toast.classList.add('translate-y-0', 'opacity-100');
-
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-                toast.classList.remove('translate-y-0', 'opacity-100');
-            }, 3000);
-        }
-
-        // 공유 링크 복사 및 알림 연동
-        function copyShareLink() {
-            const tempInput = document.createElement("input");
-            tempInput.value = window.location.href;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-
-            showToast('공유 링크 복사 완료 🚀', '클립보드에 주소가 복사되었습니다. 주위에 널리 알려주세요!');
-        }
-
-        // 이메일 주소 복사 유틸리티
-        function copyEmail() {
-            const tempInput = document.createElement("input");
-            tempInput.value = "chuzwhat@gmail.com";
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-
-            showToast('이메일 주소 복사 완료 ✉️', 'chuzwhat@gmail.com 주소가 클립보드에 복사되었습니다.');
-        }
-
-        // 관리자 패널 활성화 토글 (비밀번호: 1234)
-        function toggleAdmin() {
-            if (!AppState.isAdmin) {
-                const password = prompt("관리자 비밀번호를 입력하십시오:");
-                if (password === "1234") {
-                    AppState.isAdmin = true;
-                    document.getElementById('admin-panel').classList.remove('hidden');
-                    showToast('관리자 인증 완료 🔐', '법인 등록 및 수정/삭제 권한이 부여되었습니다.');
-                    setTimeout(() => {
-                        window.scrollTo({
-                            top: document.body.scrollHeight,
-                            behavior: 'smooth'
-                        });
-                    }, 200);
-                    render();
-                } else {
-                    alert("인증 정보가 유효하지 않습니다.");
-                }
-            } else {
-                AppState.isAdmin = false;
-                document.getElementById('admin-panel').classList.add('hidden');
-                showToast('관리자 모드 해제 🔒', '사용자 모드로 변경되었습니다.');
-                render();
-            }
-        }
-
-        // 새 법인 등록 처리 함수
-window.addCompany = async function() {
-    const name = document.getElementById('comp-name').value.trim();
-    const url = document.getElementById('comp-url').value.trim();
-    const address = document.getElementById('comp-address').value.trim();
-    const revenueNum = parseInt(document.getElementById('comp-revenue-num').value) || 0;
-    const revenue = document.getElementById('comp-revenue-text').value.trim();
-    const downloadUrl = document.getElementById('comp-download').value.trim();
-
-    if (!name || !url) return alert("법인명과 홈페이지 주소는 필수입니다.");
-
-    const newCompany = { id: Date.now().toString(), name, url, address, revenueNum, revenue, downloadUrl, clicks: 0 };
-
-    try {
-        await setDoc(doc(db, "companies", newCompany.id), newCompany);
-        AppState.companies.push(newCompany);
-        render();
-        // 폼 초기화
-        document.getElementById('comp-name').value = '';
-        document.getElementById('comp-url').value = '';
-        showToast('법인 등록 완료 🎉', 'Firebase에 영구 저장되었습니다.');
-    } catch (e) {
-        alert("저장 실패: " + e.message);
-    }
+const firebaseConfig = {
+    apiKey: "AIzaSyDjMCSvKdTVC_K-Vw_GbFZviddreKOFCew",
+    authDomain: "appraisal-directory-4b333.firebaseapp.com",
+    projectId: "appraisal-directory-4b333",
+    storageBucket: "appraisal-directory-4b333.firebasestorage.app",
+    messagingSenderId: "57634472408",
+    appId: "1:57634472408:web:72f02ffb66764e20d632ad",
+    measurementId: "G-1ZRRP8ZT19"
 };
-// async function addCompany() {
-//             const name = document.getElementById('comp-name').value.trim();
-//             const url = document.getElementById('comp-url').value.trim();
-//             const address = document.getElementById('comp-address').value.trim();
-//             const revenueNum = parseInt(document.getElementById('comp-revenue-num').value) || 0;
-//             const revenue = document.getElementById('comp-revenue-text').value.trim();
-//             const downloadUrl = document.getElementById('comp-download').value.trim();
 
-//             if (!name || !url) {
-//                 return alert("법인명과 홈페이지 주소는 필수로 채워 넣어야 합니다.");
-//             }
+const app  = initializeApp(firebaseConfig);
+const db   = getFirestore(app);
+const auth = getAuth(app);
 
-//            const newCompany = {
-//         id: Date.now().toString(), // Firebase용으로 id를 문자열로 변환
-//         name, url, address, revenueNum, revenue, downloadUrl, clicks: 0
-//     };
+/* ===================== 상태 ===================== */
+const AppState = {
+    companies: [],
+    currentSort: 'revenue',
+    currentView: 'grid',
+    searchQuery: '',
+    isAdmin: false,     // 관리자 패널 표시 여부 (UI용)
+    signedIn: false     // 실제 쓰기 권한 (Firebase Auth)
+};
 
-//     try {
-//         // Firebase에 추가
-//         await setDoc(doc(db, "companies", newCompany.id), newCompany);
-//         AppState.companies.push(newCompany);
-//         render();
-//         showToast('법인 등록 완료 🎉', 'Firebase에 영구 저장되었습니다.');
-//     } catch (e) {
-//         alert("저장에 실패했습니다. 다시 시도해주세요.");
-//     }
-// }
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, m => (
+    { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[m]
+));
 
-            AppState.companies.push(newCompany);
-            render();
-
-            // 폼 필드 비우기
-            document.getElementById('comp-name').value = '';
-            document.getElementById('comp-url').value = '';
-            document.getElementById('comp-address').value = '';
-            document.getElementById('comp-revenue-num').value = '';
-            document.getElementById('comp-revenue-text').value = '';
-            document.getElementById('comp-download').value = '';
-
-            showToast('법인 신규 등록 완료 🎉', `'${name}'의 정보가 성공적으로 영구 등록되었습니다.`);
-        }
-
-        // 기존 법인 데이터 수정 반영
-async function updateCompany(id) {
-            const name = document.getElementById(`edit-name-${id}`).value.trim();
-            const url = document.getElementById(`edit-url-${id}`).value.trim();
-            const address = document.getElementById(`edit-addr-${id}`).value.trim();
-            const revenueNum = parseInt(document.getElementById(`edit-revnum-${id}`).value) || 0;
-            const revenue = document.getElementById(`edit-revtxt-${id}`).value.trim();
-            const downloadUrl = document.getElementById(`edit-down-${id}`).value.trim();
-
-const updatedData = { name, url, address, revenueNum, revenue, downloadUrl };
-
-    try {
-        // Firebase 수정
-        await updateDoc(doc(db, "companies", id.toString()), updatedData);
-        AppState.companies = AppState.companies.map(c => c.id == id ? { ...c, ...updatedData } : c);
-        render();
-        showToast('데이터 수정 완료 💾', '서버에 반영되었습니다.');
-    } catch (e) {
-        alert("수정에 실패했습니다.");
-    }
-}
-
-        // 법인 데이터 안전 삭제
- async function deleteCompany(id) {
-    if (!confirm("정말 삭제하시겠습니까?")) return;
-
-    try {
-        // Firebase 삭제
-        await deleteDoc(doc(db, "companies", id.toString()));
-        AppState.companies = AppState.companies.filter(c => c.id != id);
-        render();
-        showToast('법인 삭제 완료 🗑️', '서버에서 제거되었습니다.');
-    } catch (e) {
-        alert("삭제에 실패했습니다.");
-    }
-}
-
-        // [비밀 기능] 키보드로 Ctrl + Shift + A 를 동시에 누르면 관리자 창이 뜹니다.
-  window.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey && e.key === 'A') {
-        e.preventDefault(); // 다른 브라우저 기능 방지
-        console.log("관리자 모드 호출 시도"); // 이 메시지가 콘솔에 뜨는지 보세요
-        openAdminModal(); // 함수 호출
-    }
+/* ===================== 실시간 구독 ===================== */
+onSnapshot(collection(db, "companies"), (snap) => {
+    AppState.companies = snap.docs.map(d => ({
+        id: d.id,
+        name: d.data().name ?? '(이름 없음)',
+        url: d.data().url ?? '#',
+        address: d.data().address ?? '주소 미등록',
+        revenue: d.data().revenue ?? '',
+        revenueNum: Number(d.data().revenueNum) || 0,
+        downloadUrl: d.data().downloadUrl ?? '',
+        clicks: Number(d.data().clicks) || 0
+    }));
+    render();
+}, (err) => {
+    console.error("Firestore 구독 실패:", err);
+    document.getElementById('company-list').innerHTML =
+        `<div class="col-span-full py-16 text-center text-rose-500 text-xs font-bold bg-white rounded-2xl border border-rose-100">
+            데이터를 불러오지 못했습니다. (${esc(err.code)}) — Firestore 보안 규칙을 확인하세요.
+         </div>`;
 });
 
-        // 시스템 실행 진입점
-        initData();
+/* ===================== 클릭 카운트 ===================== */
+async function addClick(id) {
+    try {
+        await updateDoc(doc(db, "companies", id), { clicks: increment(1) });
+        // onSnapshot이 알아서 화면을 갱신함 (reload 불필요)
+    } catch (e) {
+        console.error("클릭 반영 실패:", e);
+    }
+}
+
+/* ===================== 렌더링 ===================== */
+function render() {
+    let displayed = [...AppState.companies];
+
+    if (AppState.currentSort === 'revenue') {
+        displayed.sort((a, b) => b.revenueNum - a.revenueNum);
+    } else {
+        displayed.sort((a, b) => b.clicks - a.clicks);
+    }
+
+    if (AppState.searchQuery) {
+        displayed = displayed.filter(c =>
+            c.name.toLowerCase().includes(AppState.searchQuery) ||
+            c.address.toLowerCase().includes(AppState.searchQuery)
+        );
+    }
+
+    document.getElementById('company-count').textContent = `${displayed.length}개 법인 노출 중`;
+
+    const container = document.getElementById('company-list');
+    container.innerHTML = '';
+    container.className = AppState.currentView === 'grid'
+        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        : "flex flex-col gap-3";
+
+    if (displayed.length === 0) {
+        container.innerHTML = `
+            <div class="col-span-full py-16 text-center text-slate-400 text-xs font-medium bg-white rounded-2xl border border-slate-100 shadow-sm">
+                <i class="fa-solid fa-folder-open text-3xl mb-3 block text-slate-300"></i>
+                현재 일치하거나 등록된 법인 정보가 없습니다.
+            </div>`;
+    } else {
+        displayed.forEach(company => {
+            const card = document.createElement('div');
+
+            const adminClicksBadge = AppState.isAdmin
+                ? `<span class="bg-red-50 text-red-600 font-extrabold text-[10px] px-2 py-0.5 rounded-md flex items-center gap-1 shrink-0">
+                       <i class="fa-solid fa-lock text-[8px]"></i> 클릭수: ${company.clicks}회
+                   </span>`
+                : '';
+
+            const downloadBtn = company.downloadUrl
+                ? `<a href="${esc(company.downloadUrl)}" target="_blank" rel="noopener" class="py-2.5 bg-tossBlue-500 hover:bg-tossBlue-600 text-white font-bold text-xs text-center rounded-xl transition-colors flex items-center justify-center gap-1.5 border-none decoration-none">
+                       <i class="fa-solid fa-file-arrow-down text-[10px]"></i>자소서 다운로드
+                   </a>`
+                : `<div class="py-2.5 bg-slate-100 text-slate-400 font-bold text-xs text-center rounded-xl cursor-not-allowed flex items-center justify-center gap-1.5">자소서 준비중</div>`;
+
+            if (AppState.currentView === 'grid') {
+                card.className = "bg-white border border-slate-200/60 rounded-2xl p-5 custom-shadow hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between min-h-[215px] h-auto";
+                card.innerHTML = `
+                    <div class="space-y-2.5">
+                        <div class="flex items-center justify-between gap-2">
+                            <h3 class="text-base sm:text-lg font-black text-slate-900 truncate">
+                                <a href="${esc(company.url)}" target="_blank" rel="noopener" data-click-id="${esc(company.id)}" class="text-slate-900 hover:text-tossBlue-500 transition-colors decoration-none">${esc(company.name)}</a>
+                            </h3>
+                            ${adminClicksBadge}
+                        </div>
+                        <div class="space-y-1">
+                            <div class="text-xs sm:text-sm text-slate-900 font-extrabold flex items-center gap-1.5">
+                                <span class="text-slate-400 font-medium text-[11px] sm:text-xs shrink-0">영업수익</span>
+                                <span>${company.revenueNum > 0 ? esc(company.revenue) : '공시 준비중'}</span>
+                            </div>
+                            <div class="text-xs sm:text-[13px] text-slate-500 font-medium flex items-start gap-1.5 leading-relaxed">
+                                <i class="fa-solid fa-location-dot text-slate-300 shrink-0 mt-0.5"></i>
+                                <span class="break-keep whitespace-normal">${esc(company.address)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-50 mt-3">
+                        <a href="${esc(company.url)}" target="_blank" rel="noopener" data-click-id="${esc(company.id)}" class="py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs text-center rounded-xl transition-colors flex items-center justify-center gap-1 border-none decoration-none">
+                            홈페이지 <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-slate-400"></i>
+                        </a>
+                        ${downloadBtn}
+                    </div>`;
+            } else {
+                card.className = "bg-white border border-slate-200/60 rounded-2xl p-4 custom-shadow hover:-translate-y-0.5 transition-all duration-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4";
+                card.innerHTML = `
+                    <div class="flex-grow space-y-2">
+                        <div class="flex items-center gap-3">
+                            <h3 class="text-base sm:text-lg font-black text-slate-900">
+                                <a href="${esc(company.url)}" target="_blank" rel="noopener" data-click-id="${esc(company.id)}" class="text-slate-900 hover:text-tossBlue-500 transition-colors decoration-none">${esc(company.name)}</a>
+                            </h3>
+                            ${adminClicksBadge}
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+                            <div class="text-xs sm:text-sm text-slate-900 font-extrabold flex items-center gap-1.5">
+                                <span class="text-slate-400 font-medium text-[11px] sm:text-xs shrink-0">영업수익</span>
+                                <span>${company.revenueNum > 0 ? esc(company.revenue) : '공시 준비중'}</span>
+                            </div>
+                            <div class="text-xs sm:text-[13px] text-slate-500 font-medium truncate flex items-center gap-1">
+                                <i class="fa-solid fa-location-dot text-slate-300 shrink-0"></i>
+                                <span>${esc(company.address)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0 self-stretch sm:self-auto sm:w-[260px]">
+                        <a href="${esc(company.url)}" target="_blank" rel="noopener" data-click-id="${esc(company.id)}" class="flex-1 py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs text-center rounded-xl transition-colors flex items-center justify-center gap-1 border-none decoration-none">
+                            홈페이지 <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-slate-400"></i>
+                        </a>
+                        <div class="flex-1 shrink-0">${downloadBtn}</div>
+                    </div>`;
+            }
+            container.appendChild(card);
+        });
+    }
+
+    if (AppState.isAdmin) renderAdminTable();
+}
+
+function renderAdminTable() {
+    const tbody = document.getElementById('admin-table-body');
+    tbody.innerHTML = '';
+    AppState.companies.forEach(company => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50/50 transition-colors";
+        const cell = (id, type, val, extra = '') =>
+            `<td class="p-2 border-r border-slate-100"><input type="${type}" id="${id}" value="${esc(val)}" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold focus:border-tossBlue-500 focus:outline-none ${extra}"></td>`;
+        tr.innerHTML =
+            cell(`edit-name-${company.id}`, 'text', company.name) +
+            cell(`edit-url-${company.id}`, 'url', company.url) +
+            cell(`edit-addr-${company.id}`, 'text', company.address) +
+            cell(`edit-revnum-${company.id}`, 'number', company.revenueNum, 'text-right') +
+            cell(`edit-revtxt-${company.id}`, 'text', company.revenue) +
+            cell(`edit-down-${company.id}`, 'url', company.downloadUrl) +
+            `<td class="p-2">
+                <div class="flex items-center justify-center gap-1">
+                    <button data-save-id="${esc(company.id)}" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-[11px] py-1.5 px-2.5 rounded-lg transition-colors border-none cursor-pointer">저장</button>
+                    <button data-del-id="${esc(company.id)}" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-[11px] py-1.5 px-2.5 rounded-lg transition-colors border-none cursor-pointer">삭제</button>
+                </div>
+            </td>`;
+        tbody.appendChild(tr);
+    });
+}
+
+/* ===================== 토스트 ===================== */
+function showToast(title, body) {
+    const toast = document.getElementById('alert-toast');
+    document.getElementById('toast-title').textContent = title;
+    document.getElementById('toast-body').textContent = body;
+    toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+    setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 3000);
+}
+
+/* ===================== 관리자 CRUD ===================== */
+async function addCompany() {
+    const v = (id) => document.getElementById(id).value.trim();
+    const name = v('comp-name'), url = v('comp-url');
+    if (!name || !url) return alert("법인명과 홈페이지 주소는 필수입니다.");
+
+    const newCompany = {
+        name, url,
+        address: v('comp-address'),
+        revenueNum: parseInt(document.getElementById('comp-revenue-num').value) || 0,
+        revenue: v('comp-revenue-text'),
+        downloadUrl: v('comp-download'),
+        clicks: 0
+    };
+
+    try {
+        await setDoc(doc(collection(db, "companies")), newCompany);
+        ['comp-name','comp-url','comp-address','comp-revenue-num','comp-revenue-text','comp-download']
+            .forEach(id => document.getElementById(id).value = '');
+        showToast('법인 등록 완료 🎉', `'${name}' 정보가 Firestore에 저장되었습니다.`);
+    } catch (e) {
+        alert("저장 실패: " + e.code + "\n(로그인 여부와 보안 규칙을 확인하세요)");
+    }
+}
+
+async function updateCompany(id) {
+    const v = (p) => document.getElementById(`${p}-${id}`).value.trim();
+    try {
+        await updateDoc(doc(db, "companies", id), {
+            name: v('edit-name'),
+            url: v('edit-url'),
+            address: v('edit-addr'),
+            revenueNum: parseInt(document.getElementById(`edit-revnum-${id}`).value) || 0,
+            revenue: v('edit-revtxt'),
+            downloadUrl: v('edit-down')
+        });
+        showToast('데이터 수정 완료 💾', '서버에 반영되었습니다.');
+    } catch (e) {
+        alert("수정 실패: " + e.code);
+    }
+}
+
+async function deleteCompany(id) {
+    if (!confirm("정말 삭제하시겠습니까?")) return;
+    try {
+        await deleteDoc(doc(db, "companies", id));
+        showToast('법인 삭제 완료 🗑️', '서버에서 제거되었습니다.');
+    } catch (e) {
+        alert("삭제 실패: " + e.code);
+    }
+}
+
+function toggleAdmin() {
+    AppState.isAdmin = !AppState.isAdmin;
+    document.getElementById('admin-panel').classList.toggle('hidden', !AppState.isAdmin);
+    if (AppState.isAdmin) {
+        showToast('관리자 패널 열림 🔐', '쓰기 작업은 구글 로그인 후에만 반영됩니다.');
+        setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 200);
+    }
+    render();
+}
+
+onAuthStateChanged(auth, (user) => {
+    AppState.signedIn = !!user;
+    const badge = document.getElementById('admin-auth-state');
+    badge.textContent = user ? `로그인됨: ${user.email}` : '로그인 필요 (읽기 전용)';
+    badge.className = user
+        ? "bg-emerald-500/10 text-emerald-600 text-[10px] font-bold px-2 py-0.5 rounded-full"
+        : "bg-rose-500/10 text-rose-600 text-[10px] font-bold px-2 py-0.5 rounded-full";
+});
+
+/* ===================== 이벤트 바인딩 ===================== */
+document.getElementById('search-input').addEventListener('input', (e) => {
+    AppState.searchQuery = e.target.value.toLowerCase().trim();
+    render();
+});
+
+const activeCls   = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-white shadow-sm text-slate-900 border-none";
+const inactiveCls = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 border-none bg-transparent";
+
+function bindToggle(btnA, btnB, key, valA, valB, labelA, labelB) {
+    const a = document.getElementById(btnA), b = document.getElementById(btnB);
+    const apply = () => {
+        a.className = AppState[key] === valA ? activeCls : inactiveCls;
+        b.className = AppState[key] === valB ? activeCls : inactiveCls;
+        a.innerHTML = labelA; b.innerHTML = labelB;
         render();
-// Firebase 데이터 연동 및 통합 로직
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, updateDoc, increment, 
-    setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-    const firebaseConfig = {
-        apiKey: "AIzaSyDjMCSvKdTVC_K-Vw_GbFZviddreKOFCew",
-        authDomain: "appraisal-directory-4b333.firebaseapp.com",
-        projectId: "appraisal-directory-4b333",
-        storageBucket: "appraisal-directory-4b333.firebasestorage.app",
-        messagingSenderId: "57634472408",
-        appId: "1:57634472408:web:72f02ffb66764e20d632ad",
-        measurementId: "G-1ZRRP8ZT19"
     };
-    
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    window.db = db; // 전역으로 사용 가능하게 설정
-    window.getDocs = getDocs;
-    window.collection = collection;
-    window.doc = doc;
-    window.updateDoc = updateDoc;
-    window.increment = increment;
-    window.setDoc = setDoc;     
-    window.deleteDoc = deleteDoc;
-    window.openAdminModal = openAdminModal;
+    a.addEventListener('click', () => { AppState[key] = valA; apply(); });
+    b.addEventListener('click', () => { AppState[key] = valB; apply(); });
+}
+bindToggle('sort-rev-btn', 'sort-cli-btn', 'currentSort', 'revenue', 'clicks', '📊 영업수익 순', '🖱️ 클릭수 순');
+bindToggle('view-grid-btn', 'view-list-btn', 'currentView', 'grid', 'list',
+    '<i class="fa-solid fa-table-cells-large mr-1"></i>격자형', '<i class="fa-solid fa-list mr-1"></i>가로형');
 
-    // 데이터 가져오기
-    async function loadData() {
-        const querySnapshot = await getDocs(collection(db, "companies"));
-        AppState.companies = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        render(); // 화면에 뿌리기
+// 카드 클릭 위임 (id가 문자열이어도 안전)
+document.getElementById('company-list').addEventListener('click', (e) => {
+    const link = e.target.closest('[data-click-id]');
+    if (link) addClick(link.dataset.clickId);
+});
+
+// 관리자 테이블 버튼 위임
+document.getElementById('admin-table-body').addEventListener('click', (e) => {
+    const save = e.target.closest('[data-save-id]');
+    const del  = e.target.closest('[data-del-id]');
+    if (save) updateCompany(save.dataset.saveId);
+    if (del)  deleteCompany(del.dataset.delId);
+});
+
+document.getElementById('add-company-btn').addEventListener('click', addCompany);
+document.getElementById('admin-login-btn').addEventListener('click', () => {
+    signInWithPopup(auth, new GoogleAuthProvider()).catch(e => alert("로그인 실패: " + e.code));
+});
+
+document.getElementById('share-btn').addEventListener('click', async () => {
+    await navigator.clipboard.writeText(window.location.href);
+    showToast('공유 링크 복사 완료 🚀', '클립보드에 주소가 복사되었습니다.');
+});
+document.getElementById('copy-email-btn').addEventListener('click', async () => {
+    await navigator.clipboard.writeText("chuzwhat@gmail.com");
+    showToast('이메일 주소 복사 완료 ✉️', 'chuzwhat@gmail.com 주소가 복사되었습니다.');
+});
+
+window.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        toggleAdmin();
     }
-
-    // 클릭 이벤트 (데이터베이스 반영)
-    window.addClick = async function(id) {
-        const companyRef = doc(db, "companies", id);
-        await updateDoc(companyRef, { clicks: increment(1) });
-        loadData(); // 클릭 후 데이터 다시 불러와서 숫자 갱신
-    }
-
-    // 페이지 로드 시 시작
-    loadData();
-    console.log("Firebase 연결 성공!");
-    </script>
-    
-    <!-- 여기부터 복사해서 맨 아래에 붙이세요 -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-    import { getFirestore, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyDjMCSvKdTVC_K-Vw_GbFZviddreKOFCew",
-        authDomain: "appraisal-directory-4b333.firebaseapp.com",
-        projectId: "appraisal-directory-4b333",
-        storageBucket: "appraisal-directory-4b333.firebasestorage.app",
-        messagingSenderId: "57634472408",
-        appId: "1:57634472408:web:72f02ffb66764e20d632ad",
-        measurementId: "G-1ZRRP8ZT19"
-    };
-    
-    const app = initializeApp(firebaseConfig);
-    window.db = getFirestore(app);
-    window.doc = doc;
-    window.updateDoc = updateDoc;
-    window.increment = increment;
-    
-    console.log("Firebase 연결 성공!");
+});
+</script>
 </body>
 </html>
