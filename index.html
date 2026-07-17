@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko" class="scroll-smooth">
 <head>
@@ -88,44 +87,43 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8 pt-6 border-t border-slate-100">
                 
                 <!-- 1. 자료 출처 및 유의사항 박스 -->
-                <div class="bg-white border border-slate-200/80 rounded-2xl p-5 custom-shadow flex flex-col justify-between">
-                    <div>
-                        <div class="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-circle-info text-tossBlue-500 text-sm"></i>
-                            <span>자료 출처 및 유의사항</span>
-                        </div>
-                        <div class="text-[11px] sm:text-xs text-slate-600 mt-3 space-y-2.5 leading-relaxed font-medium">
-                            <p>• <strong>자기소개서 :</strong> 각 법인의 홈페이지에서 확인 가능한 자기소개서이며, 반드시 개별 확인을 거쳐 활용하시기 바랍니다.</p>
-                            <p>• <strong>자소서 최신 업데이트 :</strong> 2026년 7월</p>
-                            <p>• <strong>영업수익 :</strong> 각 법인의 경영공시(2025 손익계산서) 자료를 기준하였으며, 억 단위 미만 절사하였습니다.</p>
-                        </div>
-                    </div>
-                </div>
+<div class="bg-white border border-slate-200/80 rounded-2xl p-5 custom-shadow flex flex-col justify-between">
+    <div>
+        <div class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-tossBlue-500 text-sm"></i>
+            <span>자료 출처 및 유의사항</span>
+        </div>
+        <div class="text-xs sm:text-sm text-slate-600 mt-3 space-y-2.5 leading-relaxed font-medium">
+            <p>• <strong>자기소개서 :</strong> 각 법인의 홈페이지에서 확인 가능한 자기소개서이며, 반드시 개별 확인을 거쳐 활용하시기 바랍니다.</p>
+            <p>• <strong>자소서 최신 업데이트 :</strong> 2026년 7월</p>
+            <p>• <strong>영업수익 :</strong> 각 법인의 경영공시(2025 손익계산서) 자료를 기준하였으며, 억 단위 미만 절사하였습니다.</p>
+        </div>
+    </div>
+</div>
 
-                <!-- 2. 문의 및 제보 박스 -->
-                <div class="bg-slate-50 border border-slate-200/60 rounded-2xl p-5 custom-shadow flex flex-col justify-between">
-                    <div>
-                        <div class="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-bullhorn text-amber-500 text-sm"></i>
-                            <span>문의 및 제보</span>
-                        </div>
-                        <div class="text-[11px] sm:text-xs text-slate-600 mt-3 space-y-3 leading-relaxed font-medium">
-                            <p>데이터 오류 제보나 수정 요청, 문의사항이 있으시면 아래 이메일을 통해 전달해 주세요.</p>
-                            
-                            <!-- 복사 및 바로 작성이 가능한 이메일 표시 칸 -->
-                            <div class="flex items-center justify-between gap-3 bg-white border border-slate-200/80 rounded-xl p-2.5 shadow-sm">
-                                <span class="font-normal text-slate-800 tracking-tight text-xs sm:text-[13px] select-all">chuzwhat@gmail.com</span>
-                                <div class="flex items-center gap-1.5 shrink-0">
-                                    <button onclick="copyEmail()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 p-2 rounded-lg text-xs font-bold transition-all border-none flex items-center justify-center cursor-pointer" title="이메일 주소 복사">
-                                        <i class="fa-regular fa-copy"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="mailto:chuzwhat@gmail.com?subject=[감평법인 디렉토리 문의 및 제보]" class="mt-4 inline-flex items-center justify-center gap-2 bg-tossBlue-500 hover:bg-tossBlue-600 text-white py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all w-full text-center shadow-sm decoration-none">
-                        <i class="fa-solid fa-envelope text-xs"></i>
-                        <span>이메일 보내기</span>
+<!-- 2. 문의 및 제보 박스 (수정된 부분) -->
+<div class="bg-slate-50 border border-slate-200/60 rounded-2xl p-5 custom-shadow flex flex-col justify-between">
+    <div>
+        <div class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-bullhorn text-amber-500 text-sm"></i>
+            <span>문의 및 제보</span>
+        </div>
+        <div class="text-xs sm:text-sm text-slate-600 mt-3 space-y-3 leading-relaxed font-medium">
+            <p>데이터 오류 제보나 수정 요청, 문의사항이 있으시면 아래 이메일을 통해 전달해 주세요.</p>
+            
+            <div class="flex items-center justify-between gap-3 bg-white border border-slate-200/80 rounded-xl p-3 shadow-sm">
+                <span class="font-normal text-slate-800 tracking-tight text-xs sm:text-sm select-all">chuzwhat@gmail.com</span>
+                <div class="flex items-center gap-1.5 shrink-0">
+                    <button onclick="copyEmail()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 p-2 rounded-lg text-xs font-bold transition-all border-none flex items-center justify-center cursor-pointer" title="이메일 주소 복사">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="mailto:chuzwhat@gmail.com?subject=[감평법인 디렉토리 문의 및 제보]" class="mt-4 inline-flex items-center justify-center gap-2 bg-tossBlue-500 hover:bg-tossBlue-600 text-white py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all w-full text-center shadow-sm decoration-none">
+        <i class="fa-solid fa-envelope text-xs"></i>
+        <span>이메일 보내기</span>
                     </a>
                 </div>
 
@@ -196,7 +194,7 @@
 
     </main>
 
-    <!-- 푸터 및 관리자 토글 영역 -->
+    <!-- 푸터 영역 -->
     <footer class="bg-white border-t border-slate-150 py-8 w-full mt-12">
         <div class="max-w-5xl mx-auto px-4 sm:px-6">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -209,9 +207,6 @@
                     <span class="text-[10px] sm:text-xs text-slate-400 font-semibold">
                         © 2026 Appraisal Directory.
                     </span>
-                    <button onclick="toggleAdmin()" class="bg-transparent border-none text-[10px] sm:text-xs text-slate-300 hover:text-slate-500 cursor-pointer underline decoration-dotted transition-colors">
-                        관리자 메뉴
-                    </button>
                 </div>
             </div>
 
@@ -321,7 +316,7 @@
             {"id":1783908312767,"name":"대한","url":"https://kosal.co.kr/","address":"서울특별시 송파구 충민로 10, 가든파이브툴동 10층","revenueNum":634,"revenue":"634억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=14ZnkqXGE_9QA7H89IWoDzLM7xcmvnqOq","clicks":5},
             {"id":1783908613776,"name":"중앙","url":"http://www.jaa.co.kr/","address":"서울특별시 서초구 서초중앙로 63 리더스빌딩 2F","revenueNum":633,"revenue":"633억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=1Qt0SfSgNR_r05gE3DrZrAG9XH5fQtF71","clicks":10},
             {"id":1783561154543,"name":"가온","url":"http://www.igaon.co.kr/","address":"서울특별시 송파구 충민로 10 가든파이브툴 8층","revenueNum":585,"revenue":"585억 원","downloadUrl":"https://docs.google.com/uc?export=download&id=1ooU4x3VD9kaxj40BTOelDvWACt8KZW7q","clicks":11},
-            {"id":1783909197359,"name":"한국감정평가사협회","url":"https://www.kapanet.or.kr/","address":"서울특별시 서초구 방배로 52 4~6층","revenueNum":0,"revenue":"0","downloadUrl":"","clicks":25}
+            {"id":1783909197359,"name":"한국감정평가사협회","url":"https://www.kapanet.or.kr/","address":"서울특별시 서초구 방배로 52 4~6층","revenueNum":150,"revenue":"150억 원(추산)","downloadUrl":"","clicks":25}
         ];
 
         let AppState = {
@@ -699,6 +694,14 @@
             showToast('법인 영구 삭제됨 🗑️', `'${company.name}' 법인의 모든 정보와 트래킹 데이터가 일괄 삭제되었습니다.`);
             render();
         }
+
+        // [비밀 기능] 키보드로 Ctrl + Shift + A 를 동시에 누르면 관리자 창이 뜹니다.
+        window.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A' || e.key === 'a') {
+                e.preventDefault(); // 브라우저 기본 단축키 충돌 방지
+                toggleAdmin(); // 관리자 토글 함수 실행
+            }
+        });
 
         // 시스템 실행 진입점
         initData();
