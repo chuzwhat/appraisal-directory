@@ -251,7 +251,7 @@ import {
     setDoc, updateDoc, deleteDoc, increment
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import {
-    getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider
+    getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
@@ -512,18 +512,35 @@ async function deleteCompany(id) {
     }
 }
 
-function toggleAdmin() {
-    AppState.isAdmin = !AppState.isAdmin;
-    document.getElementById('admin-panel').classList.toggle('hidden', !AppState.isAdmin);
-    if (AppState.isAdmin) {
-        showToast('관리자 패널 열림 🔐', '쓰기 작업은 구글 로그인 후에만 반영됩니다.');
-        setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 200);
+async function toggleAdmin() {
+    if (AppState.isAdmin) {          // 열려 있으면 닫기
+        AppState.isAdmin = false;
+        document.getElementById('admin-panel').classList.add('hidden');
+        render();
+        return;
     }
+
+    if (!AppState.signedIn) {        // 로그인 안 됐으면 먼저 로그인
+        try {
+            const cred = await signInWithPopup(auth, new GoogleAuthProvider());
+            if (cred.user.email !== 'chuzwhat@gmail.com') {
+                await signOut(auth);
+                return alert("관리자 계정이 아닙니다.");
+            }
+        } catch (e) {
+            return alert("로그인 실패: " + e.code);
+        }
+    }
+
+    AppState.isAdmin = true;
+    document.getElementById('admin-panel').classList.remove('hidden');
+    showToast('관리자 모드 🔐', '등록 및 수정/삭제 권한이 활성화되었습니다.');
+    setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 200);
     render();
 }
 
 onAuthStateChanged(auth, (user) => {
-    AppState.signedIn = !!user;
+    AppState.signedIn = !!user;  && user.email === 'chuzwhat@gmail.com';
     const badge = document.getElementById('admin-auth-state');
     badge.textContent = user ? `로그인됨: ${user.email}` : '로그인 필요 (읽기 전용)';
     badge.className = user
